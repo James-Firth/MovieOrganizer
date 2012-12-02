@@ -37,10 +37,12 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "HomeForm";
             this.Text = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
     }
 }

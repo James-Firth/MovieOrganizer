@@ -11,9 +11,16 @@ namespace MovieOrganizer
 {
     public partial class HomeForm : Form
     {
-        public HomeForm()
+        Form login;
+        public HomeForm(object sender)
         {
+            login = (Form)sender;
             InitializeComponent();
+        }
+
+        private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            login.Close();
         }
     }
 }
