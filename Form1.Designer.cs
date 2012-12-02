@@ -80,7 +80,6 @@
             this.txtboxPassword.PasswordChar = '*';
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxPassword.TabIndex = 2;
-            this.txtboxPassword.TextChanged += new System.EventHandler(this.txtboxPassword_TextChanged);
             this.txtboxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxPassword_KeyPress);
             this.txtboxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxPassword_Validating);
             // 
@@ -152,7 +151,7 @@
             this.Controls.Add(this.btnLogin);
             this.Name = "LoginForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
+
             ((System.ComponentModel.ISupportInitialize)(this.errUserName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPassword)).EndInit();
             this.pnlLogin.ResumeLayout(false);
