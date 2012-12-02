@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace MovieOrganizer
 {
@@ -29,6 +30,37 @@ namespace MovieOrganizer
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //string connString = "SERVER=174.127.110.143;DATABASE=kccofor9_Movie;UID=kccofor9_Movie;PASSWORD=wt;&.=T[whR@";//etc
+            MySqlConnection conn = new MySqlConnection("SERVER=174.127.110.143;DATABASE=kccofor9_Movie;UID=kccofor9_m;PASSWORD=1a2b3c4d");
+
+            try
+            {
+                conn.Open(); //opens connection to server
+                MySqlCommand command = new MySqlCommand("INSERT INTO Users (name,pass) VALUES('Test User', 'Pfftpasswords')",conn);
+
+                command.ExecuteNonQuery();
+                //command.BeginExecuteNonQuery();
+                conn.Close(); //closes connection to server
+            }
+            catch (MySqlException ex)
+            {
+                //The two most common error numbers when connecting are as follows:
+                //0: Cannot connect to server.
+                //1045: Invalid user name and/or password.
+                switch (ex.Number)
+                {
+                    case 0:
+                        MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        break;
+
+                    case 1045:
+                        MessageBox.Show("Invalid username/password, please try again");
+                        break;
+                }
+            }
+
+
+
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
             {
                 HomeForm main = new HomeForm(this);
