@@ -31,24 +31,20 @@ namespace MovieOrganizer
         private void btnLogin_Click(object sender, EventArgs e)
         {
             DBConnect connector = new DBConnect();
-            List<String>[] temp = connector.Select("SELECT * FROM Users");
-            if (temp[1].Equals(txtboxUserName.Text))
+            List<String>[] temp = connector.SelectUsers("SELECT * FROM Users WHERE name='"+txtboxUserName.Text+"' AND pass='"+txtboxPassword.Text+"'");
+
+            if (temp[0].Count == 1)
             {
                 userValid = true;
-            }
-            else
-            {
-                userValid = false;
-            }
-            if (temp[2].Equals(txtboxPassword.Text))
-            {
                 passValid = true;
             }
             else
             {
+                userValid = false;
                 passValid = false;
+                MessageBox.Show("Error: username/password do not match");
             }
-          
+
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
             {
                 HomeForm main = new HomeForm(this);
@@ -242,7 +238,7 @@ namespace MovieOrganizer
         }
 
         //Select statement
-        public List<string>[] Select(String cmdString)
+        public List<string>[] SelectUsers(String cmdString)
         {
             string query = cmdString;
 
