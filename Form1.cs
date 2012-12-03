@@ -32,7 +32,7 @@ namespace MovieOrganizer
         {
             DBConnect connector = new DBConnect();
             List<String>[] temp = connector.SelectUsers("SELECT * FROM Users WHERE name='"+txtboxUserName.Text+"' AND pass='"+txtboxPassword.Text+"'");
-
+            ValidateLogin();
             if (temp[0].Count == 1)
             {
                 userValid = true;
@@ -42,7 +42,9 @@ namespace MovieOrganizer
             {
                 userValid = false;
                 passValid = false;
+                txtboxPassword.Text = "";
                 MessageBox.Show("Error: username/password do not match");
+                lblErrorMsg.Visible = true;
             }
 
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
@@ -55,53 +57,34 @@ namespace MovieOrganizer
             }
             else
             {
-                if (txtboxPassword.Text.Equals("") || txtboxUserName.Text.Equals(""))
-                {
-                    lblErrorMsg.Text = "Please enter information into the empty field(s)";
-                }
-                else
-                {
-                    lblErrorMsg.Text = "Please fix Errors before continuing";
-                }
+                lblErrorMsg.Visible = true;
 
             }
         }
 
-        private void txtboxUserName_Validating(object sender, CancelEventArgs e)
+        private void ValidateLogin()
         {
             if (!txtboxUserName.Text.Equals(""))//everythin's cool
             {
                 errUserName.Clear();
-                lblErrorMsg.Text = "";
+                lblErrorMsg.Visible = false;
                 userValid = true;
             }
             else
             {
                 errUserName.SetError(txtboxUserName, "No Blanks allowed!");
-                lblErrorMsg.Text = "No blanks allowed!";
+                lblErrorMsg.Visible = true;
                 userValid = false;
             }
         }
-
-        private void txtboxPassword_Validating(object sender, CancelEventArgs e)
-        {
-            if (!txtboxPassword.Text.Equals(""))//everythin's cool
-            {
-                errPassword.Clear();
-                lblErrorMsg.Text = "";
-                passValid = true;
-            }
-            else
-            {
-                errUserName.SetError(txtboxPassword, "No Blanks allowed!");
-                lblErrorMsg.Text = "No blanks allowed!";
-                passValid = false;
-            }
-        }
+  
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
             this.Hide();
+            txtboxUserName.Text = "";
+            txtboxPassword.Text = "";
+            lblErrorMsg.Visible = false;
             if (reg == null)
             {
                 reg = new RegisterForm(this);
@@ -118,7 +101,7 @@ namespace MovieOrganizer
         {
             if (e.KeyChar == (Char)System.ConsoleKey.Enter)
             {
-                txtboxPassword_Validating(this, null);
+                ValidateLogin();
                 btnLogin_Click(this, null);
             }
         }

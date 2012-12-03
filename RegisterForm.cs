@@ -24,6 +24,9 @@ namespace MovieOrganizer
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            txtboxUsername.Text = "";
+            txtboxPassword.Text = "";
+            txtboxConfirmPassword.Text = "";
             this.Hide();
             parent.Show();
         }
@@ -49,9 +52,50 @@ namespace MovieOrganizer
                 passValid = false;
                 errMistmatch.SetError(txtboxPassword, "ERROR");
                 errMistmatch.SetError(txtboxConfirmPassword, "ERROR");
-                txtboxConfirmPassword.Clear();
-                txtboxPassword.Clear();
+                //txtboxConfirmPassword.Clear();
+                //txtboxPassword.Clear();
             }
+        }
+
+        private void txtboxConfirmPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            btnRegister_Click(this, null);
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+
+            if (passValid)
+            {
+                DBConnect connector = new DBConnect();
+                List<String>[] temp = connector.SelectUsers("SELECT * FROM Users WHERE name='" + txtboxUsername.Text + "'");
+
+               
+                if (temp[0].Count == 0)
+                {
+                   
+                    connector.Insert("INSERT INTO Users (name,pass) VALUES ('" + txtboxUsername.Text + "','" + txtboxPassword.Text + "')");
+                    txtboxPassword.Clear();
+                    txtboxConfirmPassword.Clear();
+                    txtboxUsername.Clear();
+                    this.Hide();
+                    parent.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Error user already exists");
+                }
+            }
+            else
+            {
+                lblMismatch.Text = "Passwords do no match!";
+            }
+
+        }
+
+        private void txtboxPassword_Validating(object sender, CancelEventArgs e)
+        {
+            txtboxConfirmPassword_Validating(this, null);
         }
     }
 }

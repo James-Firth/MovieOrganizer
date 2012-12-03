@@ -83,6 +83,7 @@
             this.txtboxPassword.Name = "txtboxPassword";
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxPassword.TabIndex = 4;
+            this.txtboxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxPassword_Validating);
             // 
             // txtboxConfirmPassword
             // 
@@ -90,17 +91,18 @@
             this.txtboxConfirmPassword.Name = "txtboxConfirmPassword";
             this.txtboxConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxConfirmPassword.TabIndex = 5;
+            this.txtboxConfirmPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxConfirmPassword_KeyPress);
             this.txtboxConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxConfirmPassword_Validating);
             // 
             // btnRegister
             // 
-            this.btnRegister.Enabled = false;
             this.btnRegister.Location = new System.Drawing.Point(48, 236);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(75, 23);
             this.btnRegister.TabIndex = 6;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // btnCancel
             // 

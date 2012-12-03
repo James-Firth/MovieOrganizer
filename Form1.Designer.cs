@@ -71,7 +71,6 @@
             this.txtboxUserName.Name = "txtboxUserName";
             this.txtboxUserName.Size = new System.Drawing.Size(100, 20);
             this.txtboxUserName.TabIndex = 1;
-            this.txtboxUserName.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxUserName_Validating);
             // 
             // txtboxPassword
             // 
@@ -81,7 +80,6 @@
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxPassword.TabIndex = 2;
             this.txtboxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxPassword_KeyPress);
-            this.txtboxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxPassword_Validating);
             // 
             // label1
             // 
@@ -122,11 +120,13 @@
             // lblErrorMsg
             // 
             this.lblErrorMsg.AutoSize = true;
+            this.lblErrorMsg.ForeColor = System.Drawing.Color.Red;
             this.lblErrorMsg.Location = new System.Drawing.Point(23, 108);
             this.lblErrorMsg.Name = "lblErrorMsg";
-            this.lblErrorMsg.Size = new System.Drawing.Size(35, 13);
+            this.lblErrorMsg.Size = new System.Drawing.Size(157, 13);
             this.lblErrorMsg.TabIndex = 7;
-            this.lblErrorMsg.Text = "label3";
+            this.lblErrorMsg.Text = "Please re-enter login information";
+            this.lblErrorMsg.Visible = false;
             // 
             // pnlLogin
             // 
@@ -151,7 +151,6 @@
             this.Controls.Add(this.btnLogin);
             this.Name = "LoginForm";
             this.Text = "Form1";
-
             ((System.ComponentModel.ISupportInitialize)(this.errUserName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPassword)).EndInit();
             this.pnlLogin.ResumeLayout(false);
