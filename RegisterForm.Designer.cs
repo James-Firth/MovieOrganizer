@@ -36,7 +36,6 @@
             this.txtboxPassword = new System.Windows.Forms.TextBox();
             this.txtboxConfirmPassword = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.errMistmatch = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblMismatch = new System.Windows.Forms.Label();
@@ -46,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 67);
+            this.label1.Location = new System.Drawing.Point(64, 116);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -55,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(56, 113);
+            this.label2.Location = new System.Drawing.Point(64, 162);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
@@ -64,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 151);
+            this.label3.Location = new System.Drawing.Point(31, 200);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 2;
@@ -72,14 +71,14 @@
             // 
             // txtboxUsername
             // 
-            this.txtboxUsername.Location = new System.Drawing.Point(124, 67);
+            this.txtboxUsername.Location = new System.Drawing.Point(132, 116);
             this.txtboxUsername.Name = "txtboxUsername";
             this.txtboxUsername.Size = new System.Drawing.Size(100, 20);
             this.txtboxUsername.TabIndex = 3;
             // 
             // txtboxPassword
             // 
-            this.txtboxPassword.Location = new System.Drawing.Point(124, 110);
+            this.txtboxPassword.Location = new System.Drawing.Point(132, 159);
             this.txtboxPassword.Name = "txtboxPassword";
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxPassword.TabIndex = 4;
@@ -87,7 +86,7 @@
             // 
             // txtboxConfirmPassword
             // 
-            this.txtboxConfirmPassword.Location = new System.Drawing.Point(124, 148);
+            this.txtboxConfirmPassword.Location = new System.Drawing.Point(132, 197);
             this.txtboxConfirmPassword.Name = "txtboxConfirmPassword";
             this.txtboxConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxConfirmPassword.TabIndex = 5;
@@ -96,7 +95,7 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(48, 236);
+            this.btnRegister.Location = new System.Drawing.Point(56, 285);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(75, 23);
             this.btnRegister.TabIndex = 6;
@@ -104,19 +103,9 @@
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(138, 236);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(48, 265);
+            this.btnLogin.Location = new System.Drawing.Point(157, 285);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 8;
@@ -133,7 +122,7 @@
             // 
             this.lblMismatch.AutoSize = true;
             this.lblMismatch.ForeColor = System.Drawing.Color.Red;
-            this.lblMismatch.Location = new System.Drawing.Point(263, 155);
+            this.lblMismatch.Location = new System.Drawing.Point(106, 240);
             this.lblMismatch.Name = "lblMismatch";
             this.lblMismatch.Size = new System.Drawing.Size(126, 13);
             this.lblMismatch.TabIndex = 9;
@@ -144,10 +133,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 436);
+            this.ClientSize = new System.Drawing.Size(314, 349);
             this.Controls.Add(this.lblMismatch);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.txtboxConfirmPassword);
             this.Controls.Add(this.txtboxPassword);
@@ -172,7 +160,6 @@
         private System.Windows.Forms.TextBox txtboxPassword;
         private System.Windows.Forms.TextBox txtboxConfirmPassword;
         private System.Windows.Forms.Button btnRegister;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.ErrorProvider errMistmatch;
         private System.Windows.Forms.Label lblMismatch;

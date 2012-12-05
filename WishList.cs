@@ -47,7 +47,7 @@ namespace MovieOrganizer
         //=================================BUILDING=================================
 
         //Display Type One
-        public Panel buildWishList(int UID)
+        public Panel buildWishListView(int UID) //Had to rename --J
         {
             Panel outPanel = null;
 

@@ -22,5 +22,22 @@ namespace MovieOrganizer
         {
             login.Close();
         }
+
+        private void addBreadCrumbs(object sender, String label)
+        {
+            Button btnCurrLocation = new Button();
+            btnCurrLocation.Text = label;
+
+            Button btnDivider = new Button();
+            btnDivider.Text = "-->";
+
+            breadcrumbsLayout.Controls.Add(btnCurrLocation);
+            breadcrumbsLayout.Controls.Add(btnDivider);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            addBreadCrumbs(this, "Test");
+        }
     }
 }
