@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace MovieOrganizer
 {
@@ -30,15 +31,19 @@ namespace MovieOrganizer
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            String givenUserName = Regex.Replace(txtboxUserName.Text, @"[\r\n\x00\x1a\\'""]", @"\$0");
+            String givenPassword = Regex.Replace(txtboxPassword.Text, @"[\r\n\x00\x1a\\'""]", @"\$0");
+
+
             DBConnect connector = new DBConnect();
-            List<String>[] temp = connector.SelectUsers("SELECT * FROM Users WHERE name='"+txtboxUserName.Text+"' AND pass='"+txtboxPassword.Text+"'");
+            List<String>[] temp = connector.SelectUsers("SELECT * FROM Users WHERE name='" + givenUserName + "' AND pass='" + givenPassword + "'");
             ValidateLogin();
-            if (temp[0].Count == 1)
+            if (temp[0].Count == 1) //Pass
             {
                 userValid = true;
                 passValid = true;
             }
-            else
+            else //Fail because of wrong password
             {
                 userValid = false;
                 passValid = false;
@@ -46,6 +51,7 @@ namespace MovieOrganizer
                 MessageBox.Show("Error: username/password do not match");
                 lblErrorMsg.Visible = true;
             }
+
 
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
             {
