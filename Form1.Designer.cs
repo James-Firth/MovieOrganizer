@@ -47,7 +47,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(71, 240);
+            this.btnLogin.Location = new System.Drawing.Point(27, 197);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 3;
@@ -57,7 +57,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(152, 240);
+            this.button2.Location = new System.Drawing.Point(121, 226);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -74,7 +74,7 @@
             // 
             // txtboxPassword
             // 
-            this.txtboxPassword.Location = new System.Drawing.Point(84, 62);
+            this.txtboxPassword.Location = new System.Drawing.Point(84, 29);
             this.txtboxPassword.Name = "txtboxPassword";
             this.txtboxPassword.PasswordChar = '*';
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
@@ -84,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 10);
+            this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 4;
@@ -93,7 +93,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 69);
+            this.label2.Location = new System.Drawing.Point(14, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 5;
@@ -109,7 +109,7 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(71, 269);
+            this.btnRegister.Location = new System.Drawing.Point(121, 197);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(75, 23);
             this.btnRegister.TabIndex = 7;
@@ -121,7 +121,7 @@
             // 
             this.lblErrorMsg.AutoSize = true;
             this.lblErrorMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorMsg.Location = new System.Drawing.Point(23, 108);
+            this.lblErrorMsg.Location = new System.Drawing.Point(27, 61);
             this.lblErrorMsg.Name = "lblErrorMsg";
             this.lblErrorMsg.Size = new System.Drawing.Size(157, 13);
             this.lblErrorMsg.TabIndex = 7;
@@ -135,16 +135,16 @@
             this.pnlLogin.Controls.Add(this.label2);
             this.pnlLogin.Controls.Add(this.label1);
             this.pnlLogin.Controls.Add(this.txtboxPassword);
-            this.pnlLogin.Location = new System.Drawing.Point(71, 22);
+            this.pnlLogin.Location = new System.Drawing.Point(12, 108);
             this.pnlLogin.Name = "pnlLogin";
-            this.pnlLogin.Size = new System.Drawing.Size(229, 170);
+            this.pnlLogin.Size = new System.Drawing.Size(198, 83);
             this.pnlLogin.TabIndex = 8;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 384);
+            this.ClientSize = new System.Drawing.Size(221, 260);
             this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.button2);
