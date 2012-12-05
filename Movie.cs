@@ -27,5 +27,20 @@ namespace MovieOrganizer
             this.Actors = Actors;
             this.Genres = Genres;
         }
+
+        public String ToString()
+        {
+            String toReturn = "";
+            toReturn = MID.ToString() + " " + title + " " + length + " " + director + " " + year + " ";
+            for (int i = 0; i < Actors.Count; i++)
+            {
+                toReturn = toReturn + Actors[i].getName()+" ";
+            }
+            for(int j=0; j < Genres.Count; j++)
+            {
+                toReturn = toReturn + Genres[j].getName()+" ";
+            }
+            return toReturn;
+        }
     }
 }

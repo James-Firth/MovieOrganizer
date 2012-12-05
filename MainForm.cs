@@ -58,6 +58,17 @@ namespace MovieOrganizer
             
         }
 
+        public void Search(String searchTerm)
+        {
+            DBConnect helper = new DBConnect();
+            List<Movie> movies = helper.SelectMovie("SELECT * FROM Movies WHERE title LIKE '%"+searchTerm+"%'");
+            if(movies.Count != 0)
+                MessageBox.Show(movies[0].ToString());
+            else
+                MessageBox.Show("Nothing found...?");
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             addBreadrumbs(this, "Test");
@@ -72,10 +83,6 @@ namespace MovieOrganizer
         {
             if (e.KeyChar == (char)ConsoleKey.Enter)
                 Search(txtSearch.Text);
-        }
-
-        private void Search(String term)
-        {
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -96,6 +103,11 @@ namespace MovieOrganizer
             Genre blah = test[0];
             MessageBox.Show(blah.getName());
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Search("Amazon");
         }
 
     }

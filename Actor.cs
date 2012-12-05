@@ -10,11 +10,16 @@ namespace MovieOrganizer
         int AID;
         String name;
 
-        Actor(int AID, String name)
+        public Actor(int AID, String name)
         {
             this.AID = AID;
             this.name = name;
 
+        }
+
+        public String getName()
+        {
+            return name;
         }
     }
 }

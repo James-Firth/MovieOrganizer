@@ -161,7 +161,6 @@ namespace MovieOrganizer
             }
         }
 
-        //Movie(int MID,String title,String length,String director,String year,List<Actor> Actors, List<Genre> Genres)
         //Select statement
         public List<Genre> SelectGenres(String cmdString)
         {
@@ -188,6 +187,82 @@ namespace MovieOrganizer
                 while (dataReader.Read())
                 {
                     list.Add(new Genre(Int32.Parse(dataReader["GID"]+""),dataReader["name"]+""));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        //Select statement
+        public List<Actor> SelectActor(String cmdString)
+        {
+            string query = cmdString;
+            List<Actor> list = new List<Actor>();
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    list.Add(new Actor(Int32.Parse(dataReader["AID"]+""),dataReader["name"]+""));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        //Select statement
+        //  public Movie(int MID,String title,String length,String director,String year,List<Actor> Actors, List<Genre> Genres)
+        public List<Movie> SelectMovie(String cmdString)
+        {
+            string query = cmdString;
+            List<Movie> list = new List<Movie>();
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+
+                DBConnect tempA = new DBConnect();
+                DBConnect tempB = new DBConnect();
+                while (dataReader.Read())
+                {
+                    List<Actor> actors = tempA.SelectActor("SELECT * FROM WasIn,Actors WHERE WasIn.AID=Actors.AID AND WasIn.MID="+dataReader["MID"]);
+                    List<Genre> genres = tempB.SelectGenres("SELECT * FROM FitsIn,Genres WHERE Genres.GID=FitsIn.GID AND FitsIn.MID=" + dataReader["MID"]);
+                    list.Add(new Movie(Int32.Parse(dataReader["MID"] + ""), dataReader["title"]+"", dataReader["length"] + "", dataReader["director"] + "", dataReader["year"] + "",actors,genres));
                 }
 
                 //close Data Reader
