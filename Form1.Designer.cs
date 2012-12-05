@@ -150,7 +150,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnLogin);
             this.Name = "LoginForm";
-            this.Text = "Form1";
+            this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.errUserName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPassword)).EndInit();
             this.pnlLogin.ResumeLayout(false);
