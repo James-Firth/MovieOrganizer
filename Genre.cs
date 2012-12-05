@@ -10,11 +10,16 @@ namespace MovieOrganizer
         int GID;
         String name;
 
-        Genre(int GID, String name)
+        public Genre(int GID, String name)
         {
             this.GID = GID;
             this.name = name;
 
+        }
+
+        public String getName()
+        {
+            return name;
         }
     }
 }

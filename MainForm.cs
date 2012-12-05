@@ -33,15 +33,7 @@ namespace MovieOrganizer
             btnCurrLocation.FlatAppearance.BorderSize = 0;
             btnCurrLocation.Name = label;
 
-            /*
-            Button btnDivider = new Button();
-            btnDivider.Text = "-->";
-            btnDivider.FlatStyle = FlatStyle.Flat;
-            btnDivider.BackColor = Color.LightSkyBlue;
-            btnDivider.FlatAppearance.BorderSize = 0;
-            */
             breadcrumbsLayout.Controls.Add(btnCurrLocation);
-            //breadcrumbsLayout.Controls.Add(btnDivider);
         }
 
         //removes breadcrumbs from navigation
@@ -63,8 +55,6 @@ namespace MovieOrganizer
                 for(int i=0; i < stopAt; i++) //And remove all the ones after the one we just removed.
                     breadcrumbsLayout.Controls.RemoveAt(len - 1);
             }
-            else
-                MessageBox.Show("ERROR");
             
         }
 
@@ -97,6 +87,15 @@ namespace MovieOrganizer
         private void button3_Click_1(object sender, EventArgs e)
         {
             addBreadrumbs(this, "Something");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DBConnect helper = new DBConnect();
+            List<Genre> test = helper.SelectGenres("SELECT * FROM Genres WHERE GID='1'");
+            Genre blah = test[0];
+            MessageBox.Show(blah.getName());
+
         }
 
     }

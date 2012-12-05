@@ -46,6 +46,7 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.menuLayout.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -133,7 +134,7 @@
             this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(71, 40);
+            this.button1.Location = new System.Drawing.Point(71, 108);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(276, 100);
@@ -219,6 +220,7 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.Controls.Add(this.button4);
             this.pnlContent.Controls.Add(this.button3);
             this.pnlContent.Controls.Add(this.button2);
             this.pnlContent.Controls.Add(this.button1);
@@ -232,7 +234,7 @@
             this.button2.BackColor = System.Drawing.Color.LightSkyBlue;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(247, 163);
+            this.button2.Location = new System.Drawing.Point(71, 236);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(276, 100);
@@ -246,7 +248,7 @@
             this.button3.BackColor = System.Drawing.Color.LightSkyBlue;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(386, 40);
+            this.button3.Location = new System.Drawing.Point(357, 108);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(276, 100);
@@ -254,6 +256,20 @@
             this.button3.Text = "Test: Add diff Breadcrumbs";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(402, 236);
+            this.button4.Margin = new System.Windows.Forms.Padding(0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(276, 100);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "TEST: Retrieve all genres";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // HomeForm
             // 
@@ -300,6 +316,7 @@
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
 
     }
 }

@@ -161,6 +161,51 @@ namespace MovieOrganizer
             }
         }
 
+        //Movie(int MID,String title,String length,String director,String year,List<Actor> Actors, List<Genre> Genres)
+        //Select statement
+        public List<Genre> SelectGenres(String cmdString)
+        {
+            string query = cmdString;
+
+            //Create a list to store the result
+            //List<string>[] list = new List<string>[3];
+            List<Genre> list = new List<Genre>();
+           // list[0] = new List<string>();
+            //list[1] = new List<string>();
+            //list[2] = new List<string>();
+            //list[2] = new List<string>();
+            //list[2] = new List<string>();
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    list.Add(new Genre(Int32.Parse(dataReader["GID"]+""),dataReader["name"]+""));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        /*
         //Count statement
         public int Count()
         {
@@ -176,5 +221,6 @@ namespace MovieOrganizer
         public void Restore()
         {
         }
+         */
     }
 }

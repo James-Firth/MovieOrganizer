@@ -17,13 +17,7 @@ namespace MovieOrganizer
         List<Genre> Genres;
 
 
-        Movie(int MID,
-                String title,
-                String length,
-                String director,
-                String year,
-                List<Actor> Actors,
-                List<Genre> Genres)
+        public Movie(int MID,String title,String length,String director,String year,List<Actor> Actors, List<Genre> Genres)
         {
             this.MID = MID;
             this.title = title;
