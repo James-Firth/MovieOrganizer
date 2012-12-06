@@ -22,7 +22,6 @@ namespace MovieOrganizer
             InitializeComponent();
 
             //TESTING ON CASEYS MACHINE
-            //Testing on Kelan's Laptop
         }
 
         private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
