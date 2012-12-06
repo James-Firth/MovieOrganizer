@@ -21,8 +21,7 @@ namespace MovieOrganizer
             login = (Form)sender;
             InitializeComponent();
 
-            //TESTING ONE TWO THREE
-            int i = 0;
+            //TESTING ON CASEYS MACHINE
         }
 
         private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
