@@ -79,5 +79,11 @@ namespace MovieOrganizer
         {
             return thumbNailHeight + 2 * thumbNailPadding;
         }
+
+        //GETTERS
+        public String getTitle()
+        {
+            return title;
+        }
     }
 }
