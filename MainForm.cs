@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MovieOrganizer
 {
-    public partial class HomeForm : Form
+    partial class HomeForm : Form
     {
         Form login;
         public HomeForm(object sender)
@@ -53,19 +53,49 @@ namespace MovieOrganizer
                 int stopAt = len-location;
                 
                 for(int i=0; i < stopAt; i++) //And remove all the ones after the one we just removed.
-                    breadcrumbsLayout.Controls.RemoveAt(len - 1);
+                    breadcrumbsLayout.Controls.RemoveAt(breadcrumbsLayout.Controls.Count - 1);
             }
             
         }
 
-        public void Search(String searchTerm)
+        void changeToSearchPage(List<Movie> found)
+        {
+            pnlContent.Controls.Clear();
+
+            //Begin Building next panel
+
+            FlowLayoutPanel thumbNailHolder = new FlowLayoutPanel();
+            thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
+            thumbNailHolder.Dock = DockStyle.Fill;
+
+            for (int i = 0; i < found.Count; i++)
+            {
+                thumbNailHolder.Controls.Add(found[i].buildThumbnailPanel());
+            }
+            pnlContent.Controls.Add(thumbNailHolder);
+
+            MessageBox.Show(found.Count.ToString());
+        }
+
+        void changeToMoviePage(Movie theMovie)
+        {
+            pnlContent.Controls.Clear();
+
+            //build new panel
+
+        }
+
+        public List<Movie> Search(String searchTerm)
         {
             DBConnect helper = new DBConnect();
             List<Movie> movies = helper.SelectMovie("SELECT * FROM Movies WHERE title LIKE '%"+searchTerm+"%'");
+            /*
             if(movies.Count != 0)
                 MessageBox.Show(movies[0].ToString());
             else
                 MessageBox.Show("Nothing found...?");
+            */
+            return movies;
 
         }
 
@@ -81,8 +111,11 @@ namespace MovieOrganizer
 
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)ConsoleKey.Enter)
-                Search(txtSearch.Text);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                List<Movie> found = Search(txtSearch.Text);
+                changeToSearchPage(found);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -107,7 +140,15 @@ namespace MovieOrganizer
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Search("Amazon");
+            List<Movie> found = Search("Amazon");
+            changeToSearchPage(found);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            List<Movie> found = Search( txtSearch.Text);
+            changeToSearchPage(found);
+
         }
 
     }

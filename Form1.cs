@@ -24,6 +24,17 @@ namespace MovieOrganizer
             passValid = false;
         }
 
+        ///REMOVE DURING PRODUCTION PHASE ///////////////////
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+            ///// JURY-RIGGED FOR NOW MAKE SURE TO REMOVE IN FINAL PRODUCT! //////
+            HomeForm main = new HomeForm(this);
+            main.Show();
+            this.Hide();
+            /////// NEEEEEEEDS TO BE REMOVED IN FINAL PRODUCT OTHERWISE YOU WILL NOT BE ABLE TO LOG IN ///////
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -111,6 +122,8 @@ namespace MovieOrganizer
                 btnLogin_Click(this, null);
             }
         }
+
+
 
     }
 }
