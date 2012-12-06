@@ -60,6 +60,7 @@
             this.txtboxUserName.Name = "txtboxUserName";
             this.txtboxUserName.Size = new System.Drawing.Size(100, 20);
             this.txtboxUserName.TabIndex = 1;
+            this.txtboxUserName.Text = "root";
             // 
             // txtboxPassword
             // 
@@ -68,6 +69,7 @@
             this.txtboxPassword.PasswordChar = '*';
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxPassword.TabIndex = 2;
+            this.txtboxPassword.Text = "1234";
             this.txtboxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxPassword_KeyPress);
             // 
             // label1

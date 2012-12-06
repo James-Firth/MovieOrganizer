@@ -12,6 +12,10 @@ namespace MovieOrganizer
     partial class HomeForm : Form
     {
         Form login;
+
+        FlowLayoutPanel thumbNailHolder;
+        int numberOfthumbNails;
+
         public HomeForm(object sender)
         {
             login = (Form)sender;
@@ -63,19 +67,42 @@ namespace MovieOrganizer
             pnlContent.Controls.Clear();
 
             //Begin Building next panel
-
-            FlowLayoutPanel thumbNailHolder = new FlowLayoutPanel();
+            pnlContent.AutoScroll = true;
+            thumbNailHolder = new FlowLayoutPanel();
             thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
-            thumbNailHolder.Dock = DockStyle.Fill;
+            thumbNailHolder.Dock = DockStyle.Top;
+            thumbNailHolder.Height = 1000;
+            this.Resize += new EventHandler(searchSizeChange);
+
 
             for (int i = 0; i < found.Count; i++)
             {
                 thumbNailHolder.Controls.Add(found[i].buildThumbnailPanel());
             }
+
+            numberOfthumbNails = found.Count;
+
             pnlContent.Controls.Add(thumbNailHolder);
 
             MessageBox.Show(found.Count.ToString());
         }
+
+        public void searchSizeChange(object sender, EventArgs ee)
+        {
+
+            int numNails = numberOfthumbNails;
+
+            int width = thumbNailHolder.Width;
+            int numPerLine = width / Movie.getNailWidth();
+            Console.Out.WriteLine("W=" + width + " numPer = " + numPerLine);
+
+            int numLines = (int)Math.Ceiling(numNails / (double)numPerLine);
+
+            thumbNailHolder.Height = numLines * Movie.getNailHeight();
+        }
+
+
+
 
         void changeToMoviePage(Movie theMovie)
         {
@@ -84,6 +111,10 @@ namespace MovieOrganizer
             //build new panel
 
         }
+
+
+
+
 
         public List<Movie> Search(String searchTerm)
         {
@@ -95,6 +126,7 @@ namespace MovieOrganizer
             else
                 MessageBox.Show("Nothing found...?");
             */
+
             return movies;
 
         }

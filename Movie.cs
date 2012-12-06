@@ -17,6 +17,10 @@ namespace MovieOrganizer
         List<Actor> Actors;
         List<Genre> Genres;
 
+        //Static Data For Building
+        static int thumbNailWidth = 150;
+        static int thumbNailHeight = 300;
+        static int thumbNailPadding = 25;
 
         public Movie(int MID,String title,String length,String director,String year,List<Actor> Actors, List<Genre> Genres)
         {
@@ -48,14 +52,13 @@ namespace MovieOrganizer
         public Panel buildThumbnailPanel()
         {
             Panel output = new Panel();
-            int width = 150;
-            int height = 300;
-            
-            output.Size = new System.Drawing.Size(width,height);
+
+
+            output.Size = new System.Drawing.Size(thumbNailWidth, thumbNailHeight);
 
             output.BackColor = System.Drawing.Color.LimeGreen;
 
-            output.Margin = new Padding(25);
+            output.Margin = new Padding(thumbNailPadding);
 
 
             Label titleBox = new Label();
@@ -65,6 +68,16 @@ namespace MovieOrganizer
             output.Controls.Add(titleBox);
 
             return output;
+        }
+
+        public static int getNailWidth()
+        {
+            return thumbNailWidth + 2*thumbNailPadding ;
+        }
+
+        internal static int getNailHeight()
+        {
+            return thumbNailHeight + 2 * thumbNailPadding;
         }
     }
 }
