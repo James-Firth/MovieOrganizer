@@ -106,7 +106,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Graphics\image-not-found.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Graphics\06-magnify.png" />
+    <Content Include="image-not-found.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
