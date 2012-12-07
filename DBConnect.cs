@@ -275,6 +275,23 @@ namespace MovieOrganizer
             }
         }
 
+        public int getUserRating(int MID, int UID)
+        {
+            int rating = -1;
+            String query = "SELECT * FROM Ratings WHERE MID='" + MID + "' AND UID ='" + UID + "'";
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader datareader = cmd.ExecuteReader();
+
+                while (datareader.Read())
+                {
+                    rating = (int)double.Parse(datareader["value"]+"");
+                }
+            }
+
+                return rating;
+        }
 
         public void addRating(int MID, int UID,int value)
         {

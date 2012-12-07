@@ -83,6 +83,7 @@
             // 
             this.txtboxPassword.Location = new System.Drawing.Point(132, 159);
             this.txtboxPassword.Name = "txtboxPassword";
+            this.txtboxPassword.PasswordChar = '*';
             this.txtboxPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxPassword.TabIndex = 4;
             this.txtboxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxPassword_Validating);
@@ -91,6 +92,7 @@
             // 
             this.txtboxConfirmPassword.Location = new System.Drawing.Point(132, 197);
             this.txtboxConfirmPassword.Name = "txtboxConfirmPassword";
+            this.txtboxConfirmPassword.PasswordChar = '*';
             this.txtboxConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxConfirmPassword.TabIndex = 5;
             this.txtboxConfirmPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxConfirmPassword_KeyPress);
@@ -157,6 +159,7 @@
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Name = "RegisterForm";
             this.Text = "RegisterForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.errMistmatch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

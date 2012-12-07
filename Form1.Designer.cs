@@ -55,6 +55,7 @@
             this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.VisibleChanged += new System.EventHandler(this.btnLogin_VisibleChanged);
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // txtboxUserName

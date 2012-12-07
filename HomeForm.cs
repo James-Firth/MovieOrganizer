@@ -25,7 +25,8 @@ namespace MovieOrganizer
         TextBox searchActor;
         TextBox searchGenre;
         Movie currMovie;
-        int avgRating;
+        int movieRating;
+        bool userRated;
         int UID;
 
         public static HomeForm self;
@@ -146,7 +147,13 @@ namespace MovieOrganizer
         {
             currMovie = theMovie;
             DBConnect helper = new DBConnect();
-            avgRating = (int)helper.AverageRating(theMovie.getMID());
+            movieRating = (int)helper.getUserRating(theMovie.getMID(), UID);
+            userRated = true;
+            if (movieRating == -1)
+            {
+                userRated = false;
+                movieRating = (int)helper.AverageRating(theMovie.getMID());
+            }
             addBreadrumbs(this, theMovie.getTitle());
             lblLocation.Text = theMovie.getTitle();
             pnlContent.Controls.Clear();
@@ -398,7 +405,7 @@ namespace MovieOrganizer
         void ratings_MouseLeave(object sender, EventArgs e)
         {
             //blankAllStars();
-            changeAllStars(avgRating);
+            changeAllStars(movieRating);
         }
 
         void twoStar_MouseEnter(object sender, EventArgs e)

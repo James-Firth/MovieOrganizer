@@ -97,5 +97,10 @@ namespace MovieOrganizer
         {
             txtboxConfirmPassword_Validating(this, null);
         }
+
+        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            parent.Close();
+        }
     }
 }

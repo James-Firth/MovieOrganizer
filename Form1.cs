@@ -130,6 +130,11 @@ namespace MovieOrganizer
             Console.Out.WriteLine(helper.AverageRating(1));
         }
 
+        private void btnLogin_VisibleChanged(object sender, EventArgs e)
+        {
+            
+        }
+
 
 
     }
