@@ -39,6 +39,7 @@
             this.btnRegister = new System.Windows.Forms.Button();
             this.lblErrorMsg = new System.Windows.Forms.Label();
             this.pnlLogin = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errUserName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPassword)).BeginInit();
             this.pnlLogin.SuspendLayout();
@@ -140,12 +141,23 @@
             this.pnlLogin.Size = new System.Drawing.Size(198, 83);
             this.pnlLogin.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(121, 37);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(221, 230);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
@@ -172,6 +184,7 @@
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Panel pnlLogin;
         private System.Windows.Forms.Label lblErrorMsg;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -660,5 +660,6 @@ namespace MovieOrganizer
             pnlContent.Controls.Clear();
         }
 
+
     }
 }

@@ -243,7 +243,7 @@ namespace MovieOrganizer
         //If no value found -1.0 
         public double AverageRating(int MID)
         {
-            string query = "SELECT avg(value) FROM Ratings WHERE MID='" + MID + "'";
+            string query = "SELECT avg(value) AS avg FROM Ratings WHERE MID='" + MID + "'";
             double output = -1.0;
             //Open connection
             if (this.OpenConnection() == true)
@@ -257,7 +257,7 @@ namespace MovieOrganizer
 
                 while (dataReader.Read())
                 {
-                    output = double.Parse(dataReader["MID"].ToString());
+                    output = double.Parse(dataReader["avg"].ToString());
                 }
 
                 //close Data Reader
@@ -275,6 +275,70 @@ namespace MovieOrganizer
             }
         }
 
+
+        public void addRating(int MID, int UID,int value)
+        {
+            int count = 0;
+
+            string queryS = "SELECT * FROM Ratings WHERE MID='" + MID + "' AND UID='" + UID + "'";
+            
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(queryS, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+
+                while (dataReader.Read())
+                {
+                    count++;
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+            }
+            
+
+            //======================END SELECT AND DECIDE ON ACTION=====================
+
+            if (count == 0)
+            {
+
+                string query = "INSERT INTO Ratings VALUES('" + UID + "','" + MID + "','" + value + "')";
+                //open connection
+                if (this.OpenConnection() == true)
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+                    //close connection
+                    this.CloseConnection();
+                }
+            }
+            else
+            {
+                string query = "UPDATE Ratings SET value='" + value + "' WHERE MID='" + MID + "' AND UID='" + UID + "'";
+
+                //open connection
+                if (this.OpenConnection() == true)
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+                    //close connection
+                    this.CloseConnection();
+                }
+            }
+        }
 
         /*
         //Count statement

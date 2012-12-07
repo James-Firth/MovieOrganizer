@@ -123,6 +123,12 @@ namespace MovieOrganizer
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DBConnect helper = new DBConnect();
+            Console.Out.WriteLine(helper.AverageRating(1));
+        }
+
 
 
     }
