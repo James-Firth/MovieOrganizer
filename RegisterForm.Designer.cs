@@ -97,6 +97,7 @@
             this.txtboxConfirmPassword.PasswordChar = '*';
             this.txtboxConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.txtboxConfirmPassword.TabIndex = 5;
+            this.txtboxConfirmPassword.TextChanged += new System.EventHandler(this.txtboxConfirmPassword_TextChanged);
             this.txtboxConfirmPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxConfirmPassword_KeyPress);
             this.txtboxConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxConfirmPassword_Validating);
             // 

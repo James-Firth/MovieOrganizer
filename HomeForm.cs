@@ -274,7 +274,7 @@ namespace MovieOrganizer
                 fiveStar.MouseClick += new MouseEventHandler(fiveStar_MouseClick);
 
                 Button watchlist = new Button();
-                if (false)//If in watchlist
+                if (helper.inWatchList(theMovie.getMID(),UID))//If in watchlist
                 {
                     watchlist.Text = "Remove from Watchlist";
                     
@@ -392,7 +392,7 @@ namespace MovieOrganizer
         void watchlist_MouseClick(object sender, MouseEventArgs e)
         {
             Button btn = (Button)sender;
-            if (true)//(((Button)sender).Text.Equals(""))//If we want to add it
+            if (btn.Text.Equals("Add to Watchlist"))//(((Button)sender).Text.Equals(""))//If we want to add it
             {
                 DBConnect adder = new DBConnect();
                 adder.addToWatchList(currMovie.getMID(), UID);
@@ -402,8 +402,8 @@ namespace MovieOrganizer
             else 
             {
                 DBConnect adder = new DBConnect();
-                //adder.addToWatchList(currMovie.getMID(), UID);//Remove from watchlist
-                //btn.Text = "Add to Watchlist";
+                adder.removeFromWatchList(currMovie.getMID(), UID);//Remove from watchlist
+                btn.Text = "Add to Watchlist";
 
             }
 

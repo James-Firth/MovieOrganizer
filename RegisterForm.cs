@@ -38,6 +38,7 @@ namespace MovieOrganizer
 
         private void txtboxConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
+            
             if (txtboxPassword.Text.Equals(txtboxConfirmPassword.Text))
             {
                 //all good
@@ -55,11 +56,13 @@ namespace MovieOrganizer
                 //txtboxConfirmPassword.Clear();
                 //txtboxPassword.Clear();
             }
+             
         }
 
         private void txtboxConfirmPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            btnRegister_Click(this, null);
+            if((char)Keys.Enter == e.KeyChar)
+                btnRegister_Click(this, null);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -93,10 +96,12 @@ namespace MovieOrganizer
 
         }
 
+        
         private void txtboxPassword_Validating(object sender, CancelEventArgs e)
         {
-            txtboxConfirmPassword_Validating(this, null);
+           // txtboxConfirmPassword_Validating(this, null);
         }
+         
 
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -112,5 +117,28 @@ namespace MovieOrganizer
         {
             txtboxConfirmPassword_KeyPress(sender, e);
         }
+
+        private void txtboxConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (txtboxPassword.Text.Length >= txtboxConfirmPassword.Text.Length && 
+                txtboxPassword.Text.Substring(0,txtboxConfirmPassword.Text.Length).Equals(txtboxConfirmPassword.Text))
+            {
+                //all good
+                errMistmatch.Clear();
+                lblMismatch.Visible = false;
+                passValid = true;
+            }
+            else
+            {
+                //error!
+                lblMismatch.Visible = true;
+                passValid = false;
+                errMistmatch.SetError(txtboxPassword, "ERROR");
+                errMistmatch.SetError(txtboxConfirmPassword, "ERROR");
+                //txtboxConfirmPassword.Clear();
+                //txtboxPassword.Clear();
+            }
+        }
+
     }
 }
