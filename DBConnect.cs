@@ -241,8 +241,10 @@ namespace MovieOrganizer
             }
         }
 
-        //If no value found -1.0 
-        public double AverageRating(int MID)
+
+
+        //============FOR RATINGS=================
+        public double AverageRating(int MID) //If no value found -1.0 
         {
             string query = "SELECT avg(value) AS avg FROM Ratings WHERE MID='" + MID + "'";
             double output = -1.0;
@@ -361,7 +363,9 @@ namespace MovieOrganizer
             }
         }
 
+        //============END RATINGS=================
 
+        //============FOR WATCHLIST=================
 
         public void addToWatchList(int MID, int UID)
         {
@@ -437,6 +441,56 @@ namespace MovieOrganizer
             return list;
 
         }
+
+        public void removeFromWatchList(int MID, int UID)
+        {
+            string query = "DELETE FROM `WatchList`WHERE MID='" + MID + "' AND UID='" + UID + "' ";
+            //open connection
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Execute command
+                cmd.ExecuteNonQuery();
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
+
+        public Boolean inWatchList(int MID, int UID)
+        {
+            int count = 0;
+
+            string queryS = "SELECT * FROM WatchList WHERE MID='" + MID + "' AND UID='" + UID + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(queryS, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+
+                while (dataReader.Read())
+                {
+                    count++;
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+            }
+            return count > 0;
+        }
+
+        //===========End FOR WATCHLIST============
+
 
         public List<Movie> selectRecomendations(int UID)
         {
@@ -534,7 +588,6 @@ namespace MovieOrganizer
             return list;
 
         }
-
 
         public List<Movie> SelectMovieByGenre(string genre)
         {
