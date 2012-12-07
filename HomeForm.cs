@@ -63,6 +63,7 @@ namespace MovieOrganizer
                     if(renamer.Length>=2)
                         newTitle = renamer[0] + " Results for '" + renamer[1] + "'";
                     lblLocation.Text = newTitle;
+                    
 
                 }
                 else
@@ -71,6 +72,16 @@ namespace MovieOrganizer
                     pnlContent.Controls.Add(pnlMovieInfo);
                     lblLocation.Text = temp;
                 }
+
+                //FIND AND REMOVE EVERYTHING BEFORE THIS ONE
+                //We record the location of it (farthest to the right)
+                int location = breadcrumbsLayout.Controls.IndexOf((Button)sender)+1;
+
+                int len = breadcrumbsLayout.Controls.Count; //then we see how many breacrumbs there are.
+                int stopAt = len - location;
+
+                for (int i = 0; i < stopAt; i++) //And remove all the ones after the one we just removed.
+                    breadcrumbsLayout.Controls.RemoveAt(breadcrumbsLayout.Controls.Count - 1);
             }
         }
         //Adds breadcrumbs to the navigation bar.
