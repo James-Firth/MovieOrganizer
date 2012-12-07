@@ -14,7 +14,9 @@ namespace MovieOrganizer
     {
         Form login;
 
+        Panel pnlSearch;
         FlowLayoutPanel thumbNailHolder;
+
         FlowLayoutPanel pnlMovieInfo;
         //Variables for the search page.
         List<PictureBox> stars;
@@ -62,7 +64,7 @@ namespace MovieOrganizer
                 if (temp.Length >= 7 && temp.Substring(0, 7).Equals("Search:"))
                 {
                     //MessageBox.Show("SEARCH TYPE LINK: "+loc+" + "+ temp);
-                    pnlContent.Controls.Add(thumbNailHolder);
+                    pnlContent.Controls.Add(pnlSearch);
                     String[] renamer = temp.Split(' ');
                     renamer[0] = renamer[0].Substring(0, (renamer[0].Length - 1));
                     String newTitle = temp;
@@ -154,6 +156,7 @@ namespace MovieOrganizer
                 userRated = false;
                 movieRating = (int)helper.AverageRating(theMovie.getMID());
             }
+            
             addBreadrumbs(this, theMovie.getTitle());
             lblLocation.Text = theMovie.getTitle();
             pnlContent.Controls.Clear();
@@ -502,7 +505,7 @@ namespace MovieOrganizer
             pnlContent.Controls.Clear();
             lblLocation.Text = "Search Results for '" + title + "'";
             removeBreadcrumbs(null, "");
-            addBreadrumbs(thumbNailHolder, "Search: " + title);
+            addBreadrumbs(pnlSearch, "Search: " + title);
             
         }
         void changeToSearchPageStage2(List<Movie> found,
@@ -513,12 +516,17 @@ namespace MovieOrganizer
                                         String actor = "")
         {
             //Begin Building next panel
-            pnlContent.AutoScroll = true;
+            
+            pnlSearch = new Panel();
+            pnlSearch.Dock = DockStyle.Fill;
+            pnlSearch.AutoScroll = true;
+
             thumbNailHolder = new FlowLayoutPanel();
             thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
             thumbNailHolder.Dock = DockStyle.Top;
             thumbNailHolder.Height = 1000;
             this.Resize += new EventHandler(searchSizeChange);
+
             FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
             topAdvanceBar.BackColor = Color.Red;
             topAdvanceBar.Height = 40;
@@ -528,6 +536,15 @@ namespace MovieOrganizer
             searchYear = new TextBox();
             searchActor = new TextBox();
             searchGenre = new TextBox();
+
+            KeyPressEventHandler KeyPress = new KeyPressEventHandler(advance_KeyPress);
+
+            searchTitle.KeyPress +=     KeyPress;
+            searchDirector.KeyPress +=  KeyPress;
+            searchYear.KeyPress +=      KeyPress;
+            searchActor.KeyPress +=     KeyPress;
+            searchGenre.KeyPress +=     KeyPress;
+
 
             Label LBLtitle = new Label();
             Label LBLdirector = new Label();
@@ -597,8 +614,10 @@ namespace MovieOrganizer
             numberOfthumbNails = found.Count;
 
             
-            pnlContent.Controls.Add(thumbNailHolder);
-            pnlContent.Controls.Add(topAdvanceBar);
+            pnlSearch.Controls.Add(thumbNailHolder);
+            pnlSearch.Controls.Add(topAdvanceBar);
+
+            pnlContent.Controls.Add(pnlSearch);
             //MessageBox.Show(found.Count.ToString());
             searchSizeChange();
         }
@@ -687,6 +706,15 @@ namespace MovieOrganizer
             {
                 
                 changeToSearchPage(txtSearch.Text);
+            }
+        }
+
+        private void advance_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+
+                changeToSearchPage(searchTitle.Text, searchDirector.Text, searchYear.Text, searchGenre.Text, searchActor.Text);
             }
         }
 

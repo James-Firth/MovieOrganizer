@@ -257,7 +257,8 @@ namespace MovieOrganizer
 
                 while (dataReader.Read())
                 {
-                    output = double.Parse(dataReader["avg"]+"");//FIXED TOSTRING
+                    if((dataReader["avg"]+"").Length >= 1)
+                        output = double.Parse(dataReader["avg"]+"");//FIXED TOSTRING
                 }
 
                 //close Data Reader
@@ -288,6 +289,8 @@ namespace MovieOrganizer
                 {
                     rating = (int)double.Parse(datareader["value"]+"");
                 }
+
+                this.CloseConnection();
             }
 
                 return rating;
