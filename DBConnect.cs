@@ -373,7 +373,7 @@ namespace MovieOrganizer
                 while (dataReader.Read())
                 {
                     DBConnect temp = new DBConnect();
-                    Console.Out.WriteLine(dataReader["MID"]);
+                    //Console.Out.WriteLine(dataReader["MID"]);
                     list.AddRange( temp.SelectMovie("SELECT * FROM Movies WHERE MID='"+dataReader["MID"]+"'"));
                 }
       
@@ -399,7 +399,7 @@ namespace MovieOrganizer
                 while (dataReader.Read())
                 {
                     DBConnect temp = new DBConnect();
-                    Console.Out.WriteLine(dataReader["MID"]);
+                    //Console.Out.WriteLine(dataReader["MID"]);
                     list.AddRange(temp.SelectMovie("SELECT * FROM Movies WHERE MID='" + dataReader["MID"] + "'"));
                 }
 

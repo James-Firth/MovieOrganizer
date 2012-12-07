@@ -46,12 +46,15 @@
             // 
             // btnLogin
             // 
+            this.btnLogin.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnLogin.Location = new System.Drawing.Point(27, 197);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // txtboxUserName
@@ -75,6 +78,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
@@ -84,6 +88,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label2.Location = new System.Drawing.Point(14, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
@@ -100,21 +105,25 @@
             // 
             // btnRegister
             // 
+            this.btnRegister.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegister.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnRegister.Location = new System.Drawing.Point(121, 197);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(75, 23);
             this.btnRegister.TabIndex = 7;
             this.btnRegister.Text = "Go Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // lblErrorMsg
             // 
             this.lblErrorMsg.AutoSize = true;
-            this.lblErrorMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorMsg.Location = new System.Drawing.Point(27, 61);
+            this.lblErrorMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorMsg.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblErrorMsg.Location = new System.Drawing.Point(5, 61);
             this.lblErrorMsg.Name = "lblErrorMsg";
-            this.lblErrorMsg.Size = new System.Drawing.Size(157, 13);
+            this.lblErrorMsg.Size = new System.Drawing.Size(190, 13);
             this.lblErrorMsg.TabIndex = 7;
             this.lblErrorMsg.Text = "Please re-enter login information";
             this.lblErrorMsg.Visible = false;
@@ -135,6 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(221, 230);
             this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.btnRegister);
