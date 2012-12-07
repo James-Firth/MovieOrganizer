@@ -66,7 +66,7 @@ namespace MovieOrganizer
 
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
             {
-                MessageBox.Show("UID:" + temp[0][0]);
+                //MessageBox.Show("UID:" + temp[0][0]);
                 HomeForm main = new HomeForm(this, int.Parse(temp[0][0]));
                 main.Show();
                 this.Hide();
@@ -127,7 +127,7 @@ namespace MovieOrganizer
         private void button1_Click(object sender, EventArgs e)
         {
             DBConnect helper = new DBConnect();
-            Console.Out.WriteLine(helper.AverageRating(1));
+            //Console.Out.WriteLine(helper.AverageRating(1));
         }
 
         private void btnLogin_VisibleChanged(object sender, EventArgs e)

@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Reflection;
 
 
 namespace MovieOrganizer
@@ -232,11 +234,11 @@ namespace MovieOrganizer
                 fourStar.Padding = new Padding(0);
                 fiveStar.Padding = new Padding(0);
 
-                oneStar.ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
-                twoStar.ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
-                threeStar.ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
-                fourStar.ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
-                fiveStar.ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
+                oneStar.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                twoStar.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                threeStar.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                fourStar.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                fiveStar.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
 
                 stars = new List<PictureBox>();
                 stars.Add(oneStar);
@@ -421,7 +423,7 @@ namespace MovieOrganizer
             int curr = stars.IndexOf(sender);
             for (int i = 0; i <= curr; i++)
             {
-                stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\yellowstar.png";
+                stars[i].ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/yellowstar.png");
 
             }
 
@@ -429,7 +431,7 @@ namespace MovieOrganizer
             {
                 for (int i = curr + 1; i < stars.Count; i++)
                 {
-                    stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
+                    stars[i].ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
                 }
             }
         }
@@ -439,7 +441,7 @@ namespace MovieOrganizer
             int curr = newRating+1;
             for (int i = 0; i <= curr; i++)
             {
-                stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\yellowstar.png";
+                stars[i].ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/yellowstar.png");
 
             }
 
@@ -447,7 +449,7 @@ namespace MovieOrganizer
             {
                 for (int i = curr + 1; i < stars.Count; i++)
                 {
-                    stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
+                    stars[i].ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
                 }
             }
         }
@@ -456,7 +458,7 @@ namespace MovieOrganizer
         {
             for (int i = 0; i < stars.Count; i++)
             {
-                stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
+                stars[i].ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
             }
         }
         void oneStar_MouseEnter(object sender, EventArgs e)
