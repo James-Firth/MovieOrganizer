@@ -27,7 +27,8 @@ namespace MovieOrganizer
 
         static int thumbNailWatchWidth = 150;
         static int thumbNailWatchHeight = 250;
-
+        static string addTo = "Add to Watchlist";
+        static string removeFrom = "Remove from Watchlist";
 
         static int thumbNailPadding = 25;
 
@@ -123,11 +124,16 @@ namespace MovieOrganizer
             
 
             Button BTNWatchList = new Button();
-            BTNWatchList.Text = "Add To Watch List";
             BTNWatchList.Dock = DockStyle.Bottom;
             BTNWatchList.AutoSize = true;
             BTNWatchList.TextAlign = ContentAlignment.MiddleCenter;
-            BTNWatchList.Click += new EventHandler(recItemAdd_MouseClick);
+            BTNWatchList.MouseClick += new MouseEventHandler(recItemAdd_MouseClick);
+
+            DBConnect checker = new DBConnect();
+            if (!checker.inWatchList(MID, HomeForm.UID))
+                BTNWatchList.Text = addTo;
+            else
+                BTNWatchList.Text = removeFrom;
 
             output.Controls.Add(poster);
             output.Controls.Add(BTNWatchList);
@@ -145,18 +151,18 @@ namespace MovieOrganizer
         {
             Button btn = (Button)sender;
             DBConnect checker = new DBConnect();
-            if (true)
+            if (btn.Text.Equals( addTo))
             {
                 DBConnect adder = new DBConnect();
                 adder.addToWatchList(this.MID, HomeForm.UID);
-                btn.Text = "Remove from Watchlist";
+                btn.Text = removeFrom;
 
             }
             else
             {
                 DBConnect remover = new DBConnect();
-                remover.addToWatchList(this.MID, HomeForm.UID);//Remove from watchlist
-                btn.Text = "Add to Watchlist";
+                remover.removeFromWatchList(this.MID, HomeForm.UID);//Remove from watchlist
+                btn.Text = addTo;
 
             }
         }
@@ -234,12 +240,12 @@ namespace MovieOrganizer
 
         public static int getNailWatchWidth()
         {
-            return thumbNailWatchWidth;
+            return thumbNailWatchWidth + 2 * thumbNailPadding;
         }
 
         public static int getNailWatchHeight()
         {
-            return thumbNailWatchHeight;
+            return thumbNailWatchHeight + 2 * thumbNailPadding;
         }
     
     }
