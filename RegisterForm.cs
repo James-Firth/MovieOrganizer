@@ -102,5 +102,15 @@ namespace MovieOrganizer
         {
             parent.Close();
         }
+
+        private void txtboxUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            txtboxConfirmPassword_KeyPress(sender, e);
+        }
+
+        private void txtboxPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            txtboxConfirmPassword_KeyPress(sender, e);
+        }
     }
 }

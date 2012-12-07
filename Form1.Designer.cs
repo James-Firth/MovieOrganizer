@@ -65,6 +65,7 @@
             this.txtboxUserName.Size = new System.Drawing.Size(100, 20);
             this.txtboxUserName.TabIndex = 1;
             this.txtboxUserName.Text = "root";
+            this.txtboxUserName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxUserName_KeyPress);
             // 
             // txtboxPassword
             // 

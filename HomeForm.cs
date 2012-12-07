@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 
 namespace MovieOrganizer
@@ -31,6 +32,7 @@ namespace MovieOrganizer
         Movie currMovie;
         int movieRating;
         bool userRated;
+        bool killForm;
         int UID;
 
         public static HomeForm self;
@@ -41,12 +43,16 @@ namespace MovieOrganizer
             this.UID = loginUID;
             InitializeComponent();
             self = this;
+            killForm = true;
 
         }
 
         private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            login.Close();
+            if (killForm)
+            {
+                login.Close();
+            }
         }
 
         private void btnCurrLocation_Click(object sender, EventArgs e)
@@ -152,6 +158,7 @@ namespace MovieOrganizer
             currMovie = theMovie;
             DBConnect helper = new DBConnect();
             movieRating = (int)helper.getUserRating(theMovie.getMID(), UID);
+            MessageBox.Show("Rating:" + movieRating.ToString());
             userRated = true;
             if (movieRating == -1)
             {
@@ -264,7 +271,15 @@ namespace MovieOrganizer
                 fiveStar.MouseClick += new MouseEventHandler(fiveStar_MouseClick);
 
                 Button watchlist = new Button();
-                watchlist.Text = "Add to Watchlist";
+                if (true)//If in watchlist
+                {
+                    watchlist.Text = "Remove from Watchlist";
+                }
+                else
+                {
+                    watchlist.Text = "Add to Watchlist";
+                }
+                watchlist.MouseClick += new MouseEventHandler(watchlist_MouseClick);
                 //watchlist.AutoSize = true;
                 watchlist.Width = 150;
                 watchlist.FlatStyle = FlatStyle.Flat;
@@ -277,6 +292,7 @@ namespace MovieOrganizer
                 ratings.Controls.Add(fiveStar);
                 ratings.Controls.Add(watchlist);
 
+                changeAllStars(movieRating);
                 leftCol.Controls.Add(ratings); //add ratings
 
                 pnlTopTable.Controls.Add(leftCol, 0, 0);
@@ -340,6 +356,8 @@ namespace MovieOrganizer
             //End of Table Panel
 
             //Below add another FlowPanel for Reviews
+
+            /*
             FlowLayoutPanel pnlReviewHolder = new FlowLayoutPanel();
             pnlReviewHolder.FlowDirection = FlowDirection.TopDown;
             
@@ -354,11 +372,12 @@ namespace MovieOrganizer
                 pnlReviewHeader.Controls.Add(toggle);
             //Add stuff to the review holder panel
             pnlReviewHolder.Controls.Add(pnlReviewHeader);
+             */
 
             
             //Add the two items to the Movie Info Panel
             pnlMovieInfo.Controls.Add(pnlTopTable);
-            pnlMovieInfo.Controls.Add(pnlReviewHolder);
+           // pnlMovieInfo.Controls.Add(pnlReviewHolder);
             //pnlMovieInfo.Controls.Add(pnlTopTable, 0, 0);
             //pnlMovieInfo.Controls.Add(pnlReviewHolder, 0, 1);
 
@@ -366,30 +385,57 @@ namespace MovieOrganizer
             pnlContent.Controls.Add(pnlMovieInfo);
         }
 
+        void watchlist_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (true)//(((Button)sender).Text.Equals(""))//If we want to add it
+            {
+                //Add to watchlist code
+            }
+            else 
+            {
+                //Remove from watchlist code
+            }
+
+        }
+
         void fiveStar_MouseClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            DBConnect rater = new DBConnect();
+            rater.addRating(currMovie.getMID(), UID, 5);
+            userRated = true;
+            movieRating = 5;
         }
 
         void fourStar_MouseClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            DBConnect rater = new DBConnect();
+            rater.addRating(currMovie.getMID(), UID, 4);
+            userRated = true;
+            movieRating = 4;
         }
 
         void threeStar_MouseClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            DBConnect rater = new DBConnect();
+            rater.addRating(currMovie.getMID(), UID, 3);
+            userRated = true;
+            movieRating = 3;
         }
 
         void twoStar_MouseClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            DBConnect rater = new DBConnect();
+            rater.addRating(currMovie.getMID(), UID, 2);
+            userRated = true;
+            movieRating = 2;
         }
 
         void oneStar_MouseClick(object sender, MouseEventArgs e)
         {
             DBConnect rater = new DBConnect();
-            rater.addRating(currMovie.getMID(),UID, 1); //////////////NOTE: CHANGE UID
+            rater.addRating(currMovie.getMID(),UID, 1);
+            userRated = true;
+            movieRating = 1;
         }
 
         void fiveStar_MouseEnter(object sender, EventArgs e)
@@ -438,8 +484,8 @@ namespace MovieOrganizer
 
         void changeAllStars(int newRating)
         {
-            int curr = newRating+1;
-            for (int i = 0; i <= curr; i++)
+            int curr = newRating;
+            for (int i = 0; i < curr; i++)
             {
                 stars[i].ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/yellowstar.png");
 
@@ -473,11 +519,7 @@ namespace MovieOrganizer
             List<Movie> found = Search(searchTerm);
             changeToSearchPageStage2(found);
         }
-        void changeToSearchPage(String title,
-                                    String director,
-                                    String year,
-                                    String genre,
-                                    String actor)
+        void changeToSearchPage(String title, String director,String year,String genre,String actor)
         {
             String name = generateName(title, director, year, genre, actor);
 
@@ -508,7 +550,10 @@ namespace MovieOrganizer
             lblLocation.Text = "Search Results for '" + title + "'";
             removeBreadcrumbs(null, "");
             addBreadrumbs(pnlSearch, "Search: " + title);
-            
+            Label loading = new Label();
+            loading.Text = "Loading...";
+            pnlContent.Controls.Add(loading);
+            //System.Threading.Thread.Sleep(500);
         }
         void changeToSearchPageStage2(List<Movie> found,
                                         String title = "",
@@ -517,6 +562,7 @@ namespace MovieOrganizer
                                         String genre = "",
                                         String actor = "")
         {
+            pnlContent.Controls.Clear();
             //Begin Building next panel
             
             pnlSearch = new Panel();
@@ -554,8 +600,11 @@ namespace MovieOrganizer
             Label LBLactor = new Label();
             Label LBLgenre = new Label();
             Button BTNsubmit = new Button();
-            BTNsubmit.Text = "Submit";
+            BTNsubmit.Text = "Advanced Search";
+            BTNsubmit.FlatStyle = FlatStyle.Flat;
+            BTNsubmit.AutoSize = true;
 
+            //Listeners
             BTNsubmit.Click += new EventHandler(submitAdvanceSearch);
             searchTitle.Text = title;
             searchDirector.Text = director;
@@ -767,6 +816,18 @@ namespace MovieOrganizer
         {
             DBConnect helper = new DBConnect();
             Console.Out.WriteLine(helper.SelectMovieByGenre("History").Count);
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            login.Show();
+            killForm = false;
+            this.Close();
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+
         }
 
 

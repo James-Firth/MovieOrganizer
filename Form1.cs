@@ -135,6 +135,11 @@ namespace MovieOrganizer
             
         }
 
+        private void txtboxUserName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            txtboxPassword_KeyPress(sender, e);
+        }
+
 
 
     }
