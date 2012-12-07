@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Collections;
 namespace MovieOrganizer
 {
     class DBConnect
@@ -296,12 +297,12 @@ namespace MovieOrganizer
                 return rating;
         }
 
-        public void addRating(int MID, int UID,int value)
+        public void addRating(int MID, int UID, int value)
         {
             int count = 0;
 
             string queryS = "SELECT * FROM Ratings WHERE MID='" + MID + "' AND UID='" + UID + "'";
-            
+
             //Open connection
             if (this.OpenConnection() == true)
             {
@@ -324,7 +325,7 @@ namespace MovieOrganizer
                 this.CloseConnection();
 
             }
-            
+
 
             //======================END SELECT AND DECIDE ON ACTION=====================
 
@@ -360,23 +361,182 @@ namespace MovieOrganizer
             }
         }
 
-        /*
-        //Count statement
-        public int Count()
-        {
-            return -999;
-        }
-        //Backup
-        public void Backup()
-        {
-        }
-        //Restore
-        public void Restore()
-        {
-        }
-         */
 
-        internal List<Movie> SelectMovieByGenre(string genre)
+
+        public void addToWatchList(int MID, int UID)
+        {
+            int count = 0;
+
+            string queryS = "SELECT * FROM WatchList WHERE MID='" + MID + "' AND UID='" + UID + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(queryS, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+
+                while (dataReader.Read())
+                {
+                    count++;
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+            }
+
+
+            //======================END SELECT AND DECIDE ON ACTION=====================
+
+            if (count == 0)
+            {
+
+                string query = "INSERT INTO `WatchList`(`UID`, `MID`) VALUES ("+UID+","+MID+")";
+                //open connection
+                if (this.OpenConnection() == true)
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+                    //close connection
+                    this.CloseConnection();
+                }
+            }
+        }
+
+        public List<Movie> selectMoviesFromWatchList(int UID)
+        {
+            List<Movie> list = new List<Movie>();
+
+            string query = "SELECT MID FROM WatchList WHERE UID ='" + UID + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    DBConnect temp = new DBConnect();
+                    //Console.Out.WriteLine(dataReader["MID"]);
+                    list.AddRange(temp.SelectMovie("SELECT * FROM Movies WHERE MID='" + dataReader["MID"] + "'"));
+                }
+
+            }
+            return list;
+
+        }
+
+        public List<Movie> selectRecomendations(int UID)
+        {
+            //Build Recomendations
+
+            string query = "SELECT avg(R.value) as avg,F.GID as GeID FROM `FitsIn` F,Ratings R WHERE R.UID =" + UID + " AND F.MID = R.MID GROUP BY F.GID";
+
+            SortedList genreScores = new SortedList();
+            List<Movie> list = new List<Movie>();
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    genreScores.Add(double.Parse(dataReader["avg"] + ""), int.Parse(dataReader["GeID"] + ""));
+                }
+
+
+                dataReader.Close();
+
+
+                //Pick top n Genre
+                const int n = 2;
+
+                for (int i = 0; i < n; i++)
+                {
+                    int curGID = -1;
+
+                    if (genreScores.Count > 0)
+                    {
+                        curGID = (int)genreScores.GetByIndex(genreScores.Count - 1);
+                        genreScores.RemoveAt(genreScores.Count - 1);
+                    }
+
+
+                    if (curGID != -1)
+                    {
+                        query = "SELECT MID FROM `FitsIn` WHERE GID = " + curGID + " ORDER BY RAND() LIMIT 5";
+
+                        //Open connection
+
+                        //Create Command
+                        cmd = new MySqlCommand(query, connection);
+                        //Create a data reader and Execute the command
+                        dataReader = cmd.ExecuteReader();
+                        //Read the data and store them in the list
+                        while (dataReader.Read())
+                        {
+                            DBConnect temp = new DBConnect();
+                            //Console.Out.WriteLine(dataReader["MID"]);
+                            list.AddRange(temp.SelectMovie("SELECT * FROM Movies WHERE MID='" + dataReader["MID"] + "'"));
+                        }
+                        dataReader.Close();
+                    }
+
+                }
+            }
+            return list;
+
+        }
+
+        public List<Movie> selectRandomMovies(int n)
+        {
+            //Build Recomendations
+
+            
+            List<Movie> list = new List<Movie>();
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                
+                String query = "SELECT MID FROM `Movies` ORDER BY RAND() LIMIT "+n;
+
+
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                        
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    DBConnect temp = new DBConnect();
+                    //Console.Out.WriteLine(dataReader["MID"]);
+                    list.AddRange(temp.SelectMovie("SELECT * FROM Movies WHERE MID='" + dataReader["MID"] + "'"));
+                }
+                dataReader.Close();
+                    
+            }
+            return list;
+
+        }
+
+
+        public List<Movie> SelectMovieByGenre(string genre)
         {
             List<Movie> list = new List<Movie>();
 
@@ -402,7 +562,7 @@ namespace MovieOrganizer
             
         }
 
-        internal List<Movie> SelectMovieByActor(string actor)
+        public List<Movie> SelectMovieByActor(string actor)
         {
             List<Movie> list = new List<Movie>();
 
