@@ -132,6 +132,7 @@
             this.btnGetRecommends.TabIndex = 3;
             this.btnGetRecommends.Text = "Recommend Me a Movie";
             this.btnGetRecommends.UseVisualStyleBackColor = false;
+            this.btnGetRecommends.Click += new System.EventHandler(this.btnGetRecommends_Click);
             // 
             // btnNavRate
             // 

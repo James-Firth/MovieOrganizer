@@ -18,7 +18,10 @@ namespace MovieOrganizer
         Form login;
 
         Panel pnlSearch;
+        Panel pnlRec;
+        
         FlowLayoutPanel thumbNailHolder;
+
 
         FlowLayoutPanel pnlMovieInfo;
         //Variables for the search page.
@@ -33,14 +36,14 @@ namespace MovieOrganizer
         int movieRating;
         bool userRated;
         bool killForm;
-        int UID;
+        public static int UID;
 
         public static HomeForm self;
 
         public HomeForm(object sender,int loginUID)
         {
             login = (Form)sender;
-            this.UID = loginUID;
+            UID = loginUID;
             InitializeComponent();
             self = this;
             killForm = true;
@@ -158,7 +161,7 @@ namespace MovieOrganizer
             currMovie = theMovie;
             DBConnect helper = new DBConnect();
             movieRating = (int)helper.getUserRating(theMovie.getMID(), UID);
-            MessageBox.Show("Rating:" + movieRating.ToString());
+           // MessageBox.Show("Rating:" + movieRating.ToString());
             userRated = true;
             if (movieRating == -1)
             {
@@ -271,9 +274,10 @@ namespace MovieOrganizer
                 fiveStar.MouseClick += new MouseEventHandler(fiveStar_MouseClick);
 
                 Button watchlist = new Button();
-                if (true)//If in watchlist
+                if (false)//If in watchlist
                 {
                     watchlist.Text = "Remove from Watchlist";
+                    
                 }
                 else
                 {
@@ -387,13 +391,20 @@ namespace MovieOrganizer
 
         void watchlist_MouseClick(object sender, MouseEventArgs e)
         {
+            Button btn = (Button)sender;
             if (true)//(((Button)sender).Text.Equals(""))//If we want to add it
             {
-                //Add to watchlist code
+                DBConnect adder = new DBConnect();
+                adder.addToWatchList(currMovie.getMID(), UID);
+                btn.Text = "Remove from Watchlist";
+
             }
             else 
             {
-                //Remove from watchlist code
+                DBConnect adder = new DBConnect();
+                //adder.addToWatchList(currMovie.getMID(), UID);//Remove from watchlist
+                //btn.Text = "Add to Watchlist";
+
             }
 
         }
@@ -573,6 +584,10 @@ namespace MovieOrganizer
             thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
             thumbNailHolder.Dock = DockStyle.Top;
             thumbNailHolder.Height = 1000;
+
+            this.Resize -= new EventHandler(searchSizeChange);
+            this.Resize -= new EventHandler(recSizeChange);
+
             this.Resize += new EventHandler(searchSizeChange);
 
             FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
@@ -830,6 +845,63 @@ namespace MovieOrganizer
 
         }
 
+        private void btnGetRecommends_Click(object sender, EventArgs e)
+        {
+            DBConnect helper = new DBConnect();
+            changeToRecPage(helper.selectRecomendations(UID));
+        }
+
+        void changeToRecPage(List<Movie> found)
+        {
+            pnlContent.Controls.Clear();
+            //Begin Building next panel
+            
+            pnlRec = new Panel();
+            pnlRec.Dock = DockStyle.Fill;
+            pnlRec.AutoScroll = true;
+
+            thumbNailHolder = new FlowLayoutPanel();
+            thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
+            thumbNailHolder.Dock = DockStyle.Top;
+            thumbNailHolder.Height = 1000;
+
+
+            this.Resize -= new EventHandler(searchSizeChange);
+            this.Resize -= new EventHandler(recSizeChange);
+
+            this.Resize += new EventHandler(recSizeChange);
+
+            for (int i = 0; i < found.Count; i++)
+            {
+                thumbNailHolder.Controls.Add(found[i].bildThumbnailWatchPanel());
+            }
+            numberOfthumbNails = found.Count;
+
+
+            pnlRec.Controls.Add(thumbNailHolder);
+
+            pnlContent.Controls.Add(pnlRec);
+            //MessageBox.Show(found.Count.ToString());
+            recSizeChange();
+        }
+
+
+        public void recSizeChange(object sender, EventArgs ee)
+        {
+            recSizeChange();
+        }
+        public void recSizeChange()
+        {
+            int numNails = numberOfthumbNails;
+            int width = thumbNailHolder.Width;
+            int numPerLine = width / Movie.getNailWatchWidth();
+            Console.Out.WriteLine("W=" + width + " numPer = " + numPerLine);
+            int numLines = (int)Math.Ceiling(numNails / (double)numPerLine);
+            thumbNailHolder.Height = numLines * Movie.getNailWatchHeight();
+        }
 
     }
+    
+        
+
 }

@@ -24,6 +24,11 @@ namespace MovieOrganizer
         //Static Data For Building
         static int thumbNailWidth = 150;
         static int thumbNailHeight = 200;
+
+        static int thumbNailWatchWidth = 150;
+        static int thumbNailWatchHeight = 250;
+
+
         static int thumbNailPadding = 25;
 
         public Movie(int MID, String title, String length, String director, String year, List<Actor> Actors, List<Genre> Genres)
@@ -90,6 +95,71 @@ namespace MovieOrganizer
             return output;
         }
 
+        public Panel bildThumbnailWatchPanel()
+        {
+            Panel output = new Panel();
+
+            output.Size = new System.Drawing.Size(thumbNailWatchWidth, thumbNailWatchHeight);
+
+            output.BackColor = System.Drawing.Color.AntiqueWhite;
+
+            output.Margin = new Padding(thumbNailPadding);
+
+
+            PictureBox poster = new PictureBox();
+            //poster.BackColor = Color.AntiqueWhite;
+            poster.Padding = new Padding(10);
+            poster.Dock = DockStyle.Fill;
+            poster.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            Image image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/image-not-found.gif"));
+            poster.Image = image;
+
+
+            Label titleBox = new Label();
+            titleBox.Text = this.title;
+            titleBox.Dock = DockStyle.Bottom;
+            titleBox.TextAlign = ContentAlignment.MiddleCenter;
+            
+
+            Button BTNWatchList = new Button();
+            BTNWatchList.Text = "Add To Watch List";
+            BTNWatchList.Dock = DockStyle.Bottom;
+            BTNWatchList.AutoSize = true;
+            BTNWatchList.TextAlign = ContentAlignment.MiddleCenter;
+            BTNWatchList.Click += new EventHandler(recItemAdd_MouseClick);
+
+            output.Controls.Add(poster);
+            output.Controls.Add(BTNWatchList);
+            output.Controls.Add(titleBox);
+
+
+            poster.Click += new EventHandler(clickedThumbNail);
+            output.Click += new EventHandler(clickedThumbNail);
+            titleBox.Click += new EventHandler(clickedThumbNail);
+            return output;
+        }
+
+
+        public void recItemAdd_MouseClick(object sender, MouseEventArgs e)
+        {
+            Button btn = (Button)sender;
+            DBConnect checker = new DBConnect();
+            if (true)
+            {
+                DBConnect adder = new DBConnect();
+                adder.addToWatchList(this.MID, HomeForm.UID);
+                btn.Text = "Remove from Watchlist";
+
+            }
+            else
+            {
+                DBConnect remover = new DBConnect();
+                remover.addToWatchList(this.MID, HomeForm.UID);//Remove from watchlist
+                btn.Text = "Add to Watchlist";
+
+            }
+        }
         void clickedThumbNail(object sender, EventArgs e)
         {
             //Console.Out.WriteLine("test MID:" + MID + " Name:" + title);
@@ -161,5 +231,16 @@ namespace MovieOrganizer
         {
             return MID;
         }
+
+        public static int getNailWatchWidth()
+        {
+            return thumbNailWatchWidth;
+        }
+
+        public static int getNailWatchHeight()
+        {
+            return thumbNailWatchHeight;
+        }
+    
     }
 }
