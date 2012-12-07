@@ -23,6 +23,8 @@ namespace MovieOrganizer
         TextBox searchTitle;
         TextBox searchDirector;
         TextBox searchYear;
+        TextBox searchActor;
+        TextBox searchGenre;
 
         public static HomeForm self;
 
@@ -490,9 +492,14 @@ namespace MovieOrganizer
             searchTitle = new TextBox();
             searchDirector = new TextBox();
             searchYear = new TextBox();
+            searchActor = new TextBox();
+            searchGenre = new TextBox();
+
             Label LBLtitle = new Label();
             Label LBLdirector = new Label();
             Label LBLyear = new Label();
+            Label LBLactor = new Label();
+            Label LBLgenre = new Label();
             Button BTNsubmit = new Button();
             BTNsubmit.Text = "Submit";
 
@@ -500,30 +507,51 @@ namespace MovieOrganizer
             searchTitle.Text = title;
             searchDirector.Text = director;
             searchYear.Text = year;
+            searchActor.Text = actor;
+            searchGenre.Text = genre;
 
 
-            LBLtitle.Width = 40;
+            LBLtitle.Width = 35;
             LBLdirector.Width = 60;
-            LBLyear.Width = 40;
+            LBLyear.Width = 35;
+            LBLactor.Width = 35;
+            LBLgenre.Width = 40;
 
-            Padding pad = new Padding(10, 10, 0, 10);
+            Padding pad = new Padding(5, 10, 0, 10);
             LBLtitle.Margin = pad;
             LBLdirector.Margin = pad;
             LBLyear.Margin = pad;
+            LBLactor.Margin = pad;
+            LBLgenre.Margin = pad;
+
             searchTitle.Margin = pad;
             searchDirector.Margin = pad;
             searchYear.Margin = pad;
+            searchActor.Margin = pad;
+            searchGenre.Margin = pad;
+
             BTNsubmit.Margin = pad;
             LBLtitle.Text = "Title:";
             LBLdirector.Text = "Director:";
             LBLyear.Text = "Year:";
+            LBLactor.Text = "Actor:";
+            LBLgenre.Text = "Genre:";
 
             topAdvanceBar.Controls.Add(LBLtitle);
             topAdvanceBar.Controls.Add(searchTitle);
+
             topAdvanceBar.Controls.Add(LBLdirector);
             topAdvanceBar.Controls.Add(searchDirector);
+
             topAdvanceBar.Controls.Add(LBLyear);
             topAdvanceBar.Controls.Add(searchYear);
+
+            topAdvanceBar.Controls.Add(LBLactor);
+            topAdvanceBar.Controls.Add(searchActor);
+
+            topAdvanceBar.Controls.Add(LBLgenre);
+            topAdvanceBar.Controls.Add(searchGenre);
+
             topAdvanceBar.Controls.Add(BTNsubmit);
 
             topAdvanceBar.Dock = DockStyle.Top;
@@ -545,8 +573,8 @@ namespace MovieOrganizer
             searchTitle.Text,
             searchDirector.Text,
             searchYear.Text,
-            "",
-            "");
+            searchGenre.Text,
+            searchActor.Text);
         }
 
         public void searchSizeChange(object sender, EventArgs ee)
@@ -593,6 +621,16 @@ namespace MovieOrganizer
             {
                 List<Movie> fromYear = helper.SelectMovie("SELECT * FROM Movies WHERE year LIKE '%" + year + "%'");
                 movies.AddRange(fromYear);
+            }
+            if (genre.Length > 2)
+            {
+                List<Movie> fromGenre = helper.SelectMovieByGenre(genre);
+                movies.AddRange(fromGenre);
+            }
+            if (actor.Length > 2)
+            {
+                List<Movie> fromActor = helper.SelectMovieByActor(actor);
+                movies.AddRange(fromActor);
             }
 
             return movies;
@@ -658,6 +696,12 @@ namespace MovieOrganizer
         private void button7_Click(object sender, EventArgs e)
         {
             pnlContent.Controls.Clear();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DBConnect helper = new DBConnect();
+            Console.Out.WriteLine(helper.SelectMovieByGenre("History").Count);
         }
 
 

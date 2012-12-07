@@ -355,5 +355,57 @@ namespace MovieOrganizer
         {
         }
          */
+
+        internal List<Movie> SelectMovieByGenre(string genre)
+        {
+            List<Movie> list = new List<Movie>();
+
+            string query = "SELECT * FROM FitsIn,Genres WHERE Genres.GID=FitsIn.GID AND name LIKE '%" + genre + "%'";
+                    
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    DBConnect temp = new DBConnect();
+                    Console.Out.WriteLine(dataReader["MID"]);
+                    list.AddRange( temp.SelectMovie("SELECT * FROM Movies WHERE MID='"+dataReader["MID"]+"'"));
+                }
+      
+            }
+            return list;
+            
+        }
+
+        internal List<Movie> SelectMovieByActor(string actor)
+        {
+            List<Movie> list = new List<Movie>();
+
+            string query = "SELECT * FROM WasIn,Actors WHERE Actors.AID=WasIn.AID AND Actors.name LIKE '%" + actor + "%'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    DBConnect temp = new DBConnect();
+                    Console.Out.WriteLine(dataReader["MID"]);
+                    list.AddRange(temp.SelectMovie("SELECT * FROM Movies WHERE MID='" + dataReader["MID"] + "'"));
+                }
+
+            }
+            return list;
+
+        }
     }
 }
