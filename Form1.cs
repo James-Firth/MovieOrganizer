@@ -29,9 +29,9 @@ namespace MovieOrganizer
         {
 
             ///// JURY-RIGGED FOR NOW MAKE SURE TO REMOVE IN FINAL PRODUCT! //////
-            HomeForm main = new HomeForm(this);
-            main.Show();
-            this.Hide();
+            //HomeForm main = new HomeForm(this);
+            //main.Show();
+            //this.Hide();
             /////// NEEEEEEEDS TO BE REMOVED IN FINAL PRODUCT OTHERWISE YOU WILL NOT BE ABLE TO LOG IN ///////
         }
 
@@ -66,7 +66,8 @@ namespace MovieOrganizer
 
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
             {
-                HomeForm main = new HomeForm(this);
+                MessageBox.Show("UID:" + temp[0][0]);
+                HomeForm main = new HomeForm(this, int.Parse(temp[0][0]));
                 main.Show();
                 this.Hide();
                 txtboxPassword.Text = "";

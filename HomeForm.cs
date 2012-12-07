@@ -18,19 +18,22 @@ namespace MovieOrganizer
         FlowLayoutPanel pnlMovieInfo;
         //Variables for the search page.
         List<PictureBox> stars;
-        //TableLayoutPanel pnlMovieInfo;
         int numberOfthumbNails;
         TextBox searchTitle;
         TextBox searchDirector;
         TextBox searchYear;
         TextBox searchActor;
         TextBox searchGenre;
+        Movie currMovie;
+        int avgRating;
+        int UID;
 
         public static HomeForm self;
 
-        public HomeForm(object sender)
+        public HomeForm(object sender,int loginUID)
         {
             login = (Form)sender;
+            this.UID = loginUID;
             InitializeComponent();
             self = this;
 
@@ -141,6 +144,9 @@ namespace MovieOrganizer
 
         public void changeToMoviePage(Movie theMovie)
         {
+            currMovie = theMovie;
+            DBConnect helper = new DBConnect();
+            avgRating = (int)helper.AverageRating(theMovie.getMID());
             addBreadrumbs(this, theMovie.getTitle());
             lblLocation.Text = theMovie.getTitle();
             pnlContent.Controls.Clear();
@@ -370,7 +376,8 @@ namespace MovieOrganizer
 
         void oneStar_MouseClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            DBConnect rater = new DBConnect();
+            rater.addRating(currMovie.getMID(),UID, 1); //////////////NOTE: CHANGE UID
         }
 
         void fiveStar_MouseEnter(object sender, EventArgs e)
@@ -390,7 +397,8 @@ namespace MovieOrganizer
 
         void ratings_MouseLeave(object sender, EventArgs e)
         {
-            blankAllStars();
+            //blankAllStars();
+            changeAllStars(avgRating);
         }
 
         void twoStar_MouseEnter(object sender, EventArgs e)
@@ -401,6 +409,24 @@ namespace MovieOrganizer
         void changeAllStars(PictureBox sender)
         {
             int curr = stars.IndexOf(sender);
+            for (int i = 0; i <= curr; i++)
+            {
+                stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\yellowstar.png";
+
+            }
+
+            if (curr + 1 < stars.Count)
+            {
+                for (int i = curr + 1; i < stars.Count; i++)
+                {
+                    stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\blankstar.png";
+                }
+            }
+        }
+
+        void changeAllStars(int newRating)
+        {
+            int curr = newRating+1;
             for (int i = 0; i <= curr; i++)
             {
                 stars[i].ImageLocation = "C:\\Users\\Casey\\Documents\\GitHub\\MovieOrganizer\\Graphics\\yellowstar.png";
@@ -470,6 +496,7 @@ namespace MovieOrganizer
             lblLocation.Text = "Search Results for '" + title + "'";
             removeBreadcrumbs(null, "");
             addBreadrumbs(thumbNailHolder, "Search: " + title);
+            
         }
         void changeToSearchPageStage2(List<Movie> found,
                                         String title = "",
@@ -561,9 +588,10 @@ namespace MovieOrganizer
                 thumbNailHolder.Controls.Add(found[i].buildThumbnailPanel());
             }
             numberOfthumbNails = found.Count;
+
+            
             pnlContent.Controls.Add(thumbNailHolder);
             pnlContent.Controls.Add(topAdvanceBar);
-
             //MessageBox.Show(found.Count.ToString());
             searchSizeChange();
         }

@@ -257,7 +257,7 @@ namespace MovieOrganizer
 
                 while (dataReader.Read())
                 {
-                    output = double.Parse(dataReader["avg"].ToString());
+                    output = double.Parse(dataReader["avg"]+"");//FIXED TOSTRING
                 }
 
                 //close Data Reader

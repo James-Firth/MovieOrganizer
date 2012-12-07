@@ -157,5 +157,9 @@ namespace MovieOrganizer
             return Genres;
         }
 
+        public int getMID()
+        {
+            return MID;
+        }
     }
 }
