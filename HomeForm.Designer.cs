@@ -61,6 +61,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -80,6 +81,7 @@
             this.tabControl1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // picLogo
@@ -109,8 +111,9 @@
             // 
             // btnHome
             // 
-            this.btnHome.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnHome.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnHome.Location = new System.Drawing.Point(23, 3);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(141, 23);
@@ -120,8 +123,9 @@
             // 
             // btnProfile
             // 
-            this.btnProfile.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnProfile.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfile.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProfile.Location = new System.Drawing.Point(23, 32);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(141, 23);
@@ -131,8 +135,9 @@
             // 
             // btnWatchlist
             // 
-            this.btnWatchlist.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnWatchlist.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnWatchlist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWatchlist.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnWatchlist.Location = new System.Drawing.Point(23, 61);
             this.btnWatchlist.Name = "btnWatchlist";
             this.btnWatchlist.Size = new System.Drawing.Size(141, 23);
@@ -142,8 +147,9 @@
             // 
             // btnGetRecommends
             // 
-            this.btnGetRecommends.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnGetRecommends.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnGetRecommends.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetRecommends.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGetRecommends.Location = new System.Drawing.Point(23, 90);
             this.btnGetRecommends.Name = "btnGetRecommends";
             this.btnGetRecommends.Size = new System.Drawing.Size(141, 23);
@@ -153,8 +159,9 @@
             // 
             // btnNavRate
             // 
-            this.btnNavRate.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNavRate.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnNavRate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNavRate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnNavRate.Location = new System.Drawing.Point(23, 119);
             this.btnNavRate.Name = "btnNavRate";
             this.btnNavRate.Size = new System.Drawing.Size(141, 23);
@@ -164,8 +171,9 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLogout.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLogout.Location = new System.Drawing.Point(23, 148);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(141, 23);
@@ -175,8 +183,9 @@
             // 
             // button7
             // 
-            this.button7.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.button7.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button7.Location = new System.Drawing.Point(23, 177);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(141, 23);
@@ -221,13 +230,14 @@
             // 
             // pnlMenus
             // 
+            this.pnlMenus.BackColor = System.Drawing.Color.LightSkyBlue;
             this.pnlMenus.Controls.Add(this.panel1);
             this.pnlMenus.Controls.Add(this.menuLayout);
             this.pnlMenus.Controls.Add(this.picLogo);
             this.pnlMenus.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMenus.Location = new System.Drawing.Point(0, 0);
             this.pnlMenus.Name = "pnlMenus";
-            this.pnlMenus.Size = new System.Drawing.Size(209, 511);
+            this.pnlMenus.Size = new System.Drawing.Size(209, 648);
             this.pnlMenus.TabIndex = 8;
             // 
             // breadcrumbsLayout
@@ -235,7 +245,7 @@
             this.breadcrumbsLayout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.breadcrumbsLayout.Location = new System.Drawing.Point(0, 43);
             this.breadcrumbsLayout.Name = "breadcrumbsLayout";
-            this.breadcrumbsLayout.Size = new System.Drawing.Size(760, 38);
+            this.breadcrumbsLayout.Size = new System.Drawing.Size(891, 38);
             this.breadcrumbsLayout.TabIndex = 5;
             // 
             // lblLocation
@@ -257,7 +267,7 @@
             this.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopBar.Location = new System.Drawing.Point(209, 0);
             this.pnlTopBar.Name = "pnlTopBar";
-            this.pnlTopBar.Size = new System.Drawing.Size(760, 81);
+            this.pnlTopBar.Size = new System.Drawing.Size(891, 81);
             this.pnlTopBar.TabIndex = 9;
             // 
             // pnlContent
@@ -265,7 +275,7 @@
             this.pnlContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlContent.BackColor = System.Drawing.Color.Aqua;
+            this.pnlContent.BackColor = System.Drawing.Color.SteelBlue;
             this.pnlContent.Controls.Add(this.panel2);
             this.pnlContent.Controls.Add(this.button6);
             this.pnlContent.Controls.Add(this.button5);
@@ -275,15 +285,15 @@
             this.pnlContent.Controls.Add(this.button1);
             this.pnlContent.Location = new System.Drawing.Point(207, 78);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(762, 433);
+            this.pnlContent.Size = new System.Drawing.Size(893, 570);
             this.pnlContent.TabIndex = 6;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.flowLayoutPanel1);
-            this.panel2.Location = new System.Drawing.Point(15, 16);
+            this.panel2.Location = new System.Drawing.Point(39, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(744, 417);
+            this.panel2.Size = new System.Drawing.Size(744, 528);
             this.panel2.TabIndex = 10;
             this.panel2.Visible = false;
             // 
@@ -294,7 +304,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(23, 13);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(744, 417);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(744, 476);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -308,14 +318,14 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(704, 245);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(741, 247);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // button8
             // 
             this.button8.Location = new System.Drawing.Point(3, 3);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(337, 199);
+            this.button8.Size = new System.Drawing.Size(337, 93);
             this.button8.TabIndex = 0;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
@@ -326,9 +336,9 @@
             this.flowLayoutPanel3.Controls.Add(this.tabControl1);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(355, 3);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(373, 3);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(346, 239);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(365, 241);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
             // button9
@@ -344,10 +354,11 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(324, 165);
+            this.tabControl1.Size = new System.Drawing.Size(343, 157);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -355,7 +366,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(316, 139);
+            this.tabPage1.Size = new System.Drawing.Size(335, 131);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -365,7 +376,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(316, 139);
+            this.tabPage2.Size = new System.Drawing.Size(335, 131);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -376,8 +387,9 @@
             this.flowLayoutPanel2.Controls.Add(this.label2);
             this.flowLayoutPanel2.Controls.Add(this.linkLabel1);
             this.flowLayoutPanel2.Controls.Add(this.label3);
+            this.flowLayoutPanel2.Controls.Add(this.pictureBox1);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 254);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 256);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(704, 160);
             this.flowLayoutPanel2.TabIndex = 1;
@@ -436,6 +448,14 @@
             this.label3.Size = new System.Drawing.Size(140, 39);
             this.label3.TabIndex = 2;
             this.label3.Text = "BIG OLD REVIEW TSTUFF\r\n\r\nBLAH BLAH BLAH\r\n";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(247, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // button6
             // 
@@ -513,10 +533,10 @@
             this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(73, 65);
+            this.button1.Location = new System.Drawing.Point(73, 134);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(276, 100);
+            this.button1.Size = new System.Drawing.Size(407, 100);
             this.button1.TabIndex = 4;
             this.button1.Text = "Test: Add Breadcrumbs";
             this.button1.UseVisualStyleBackColor = false;
@@ -527,7 +547,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(969, 511);
+            this.ClientSize = new System.Drawing.Size(1100, 648);
             this.Controls.Add(this.pnlTopBar);
             this.Controls.Add(this.pnlMenus);
             this.Controls.Add(this.pnlContent);
@@ -551,6 +571,7 @@
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -596,6 +617,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
 
     }

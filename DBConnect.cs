@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-
 namespace MovieOrganizer
 {
     class DBConnect
@@ -17,13 +16,11 @@ namespace MovieOrganizer
         private string database;
         private string uid;
         private string password;
-
         //Constructor
         public DBConnect()
         {
             Initialize();
         }
-
         //Initialize values
         private void Initialize()
         {
@@ -34,10 +31,8 @@ namespace MovieOrganizer
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
             connection = new MySqlConnection(connectionString);
         }
-
         //open connection to database
         private bool OpenConnection()
         {
@@ -58,7 +53,6 @@ namespace MovieOrganizer
                     case 0:
                         MessageBox.Show("Cannot connect to server.  Contact administrator");
                         break;
-
                     case 1045:
                         MessageBox.Show("Invalid username/password, please try again");
                         break;
@@ -66,7 +60,6 @@ namespace MovieOrganizer
                 return false;
             }
         }
-
         //Close connection
         private bool CloseConnection()
         {
@@ -81,36 +74,29 @@ namespace MovieOrganizer
                 return false;
             }
         }
-
         //Insert statement
         public void Insert(String cmdString)
         {
             string query = cmdString;
-
             //open connection
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-
                 //Execute command
                 cmd.ExecuteNonQuery();
-
                 //close connection
                 this.CloseConnection();
             }
         }
-
         //Update statement
         public void Update()
         {
         }
-
         //Delete statement
         public void Delete(String cmdString)
         {
             string query = cmdString;
-
             if (this.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -118,18 +104,15 @@ namespace MovieOrganizer
                 this.CloseConnection();
             }
         }
-
         //Select statement
         public List<string>[] SelectUsers(String cmdString)
         {
             string query = cmdString;
-
             //Create a list to store the result
             List<string>[] list = new List<string>[3];
             list[0] = new List<string>();
             list[1] = new List<string>();
             list[2] = new List<string>();
-
             //Open connection
             if (this.OpenConnection() == true)
             {
@@ -137,7 +120,6 @@ namespace MovieOrganizer
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
@@ -145,13 +127,10 @@ namespace MovieOrganizer
                     list[1].Add(dataReader["name"] + "");
                     list[2].Add(dataReader["pass"] + "");
                 }
-
                 //close Data Reader
                 dataReader.Close();
-
                 //close Connection
                 this.CloseConnection();
-
                 //return list to be displayed
                 return list;
             }
@@ -160,21 +139,18 @@ namespace MovieOrganizer
                 return list;
             }
         }
-
         //Select statement
         public List<Genre> SelectGenres(String cmdString)
         {
             string query = cmdString;
-
             //Create a list to store the result
             //List<string>[] list = new List<string>[3];
             List<Genre> list = new List<Genre>();
-           // list[0] = new List<string>();
+            // list[0] = new List<string>();
             //list[1] = new List<string>();
             //list[2] = new List<string>();
             //list[2] = new List<string>();
             //list[2] = new List<string>();
-
             //Open connection
             if (this.OpenConnection() == true)
             {
@@ -182,19 +158,16 @@ namespace MovieOrganizer
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-                
+
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list.Add(new Genre(Int32.Parse(dataReader["GID"]+""),dataReader["name"]+""));
+                    list.Add(new Genre(Int32.Parse(dataReader["GID"] + ""), dataReader["name"] + ""));
                 }
-
                 //close Data Reader
                 dataReader.Close();
-
                 //close Connection
                 this.CloseConnection();
-
                 //return list to be displayed
                 return list;
             }
@@ -203,13 +176,11 @@ namespace MovieOrganizer
                 return list;
             }
         }
-
         //Select statement
         public List<Actor> SelectActor(String cmdString)
         {
             string query = cmdString;
             List<Actor> list = new List<Actor>();
-
             //Open connection
             if (this.OpenConnection() == true)
             {
@@ -217,19 +188,15 @@ namespace MovieOrganizer
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list.Add(new Actor(Int32.Parse(dataReader["AID"]+""),dataReader["name"]+""));
+                    list.Add(new Actor(Int32.Parse(dataReader["AID"] + ""), dataReader["name"] + ""));
                 }
-
                 //close Data Reader
                 dataReader.Close();
-
                 //close Connection
                 this.CloseConnection();
-
                 //return list to be displayed
                 return list;
             }
@@ -238,14 +205,46 @@ namespace MovieOrganizer
                 return list;
             }
         }
-
         //Select statement
         //  public Movie(int MID,String title,String length,String director,String year,List<Actor> Actors, List<Genre> Genres)
         public List<Movie> SelectMovie(String cmdString)
         {
             string query = cmdString;
             List<Movie> list = new List<Movie>();
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                //Read the data and store them in the list
+                DBConnect tempA = new DBConnect();
+                DBConnect tempB = new DBConnect();
+                while (dataReader.Read())
+                {
+                    List<Actor> actors = tempA.SelectActor("SELECT * FROM WasIn,Actors WHERE WasIn.AID=Actors.AID AND WasIn.MID=" + dataReader["MID"]);
+                    List<Genre> genres = tempB.SelectGenres("SELECT * FROM FitsIn,Genres WHERE Genres.GID=FitsIn.GID AND FitsIn.MID=" + dataReader["MID"]);
+                    list.Add(new Movie(Int32.Parse(dataReader["MID"] + ""), dataReader["title"] + "", dataReader["length"] + "", dataReader["director"] + "", dataReader["year"] + "", actors, genres));
+                }
+                //close Data Reader
+                dataReader.Close();
+                //close Connection
+                this.CloseConnection();
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
 
+        //If no value found -1.0 
+        public double AverageRating(int MID)
+        {
+            string query = "SELECT avg(value) FROM Ratings WHERE MID='" + MID + "'";
+            double output = -1.0;
             //Open connection
             if (this.OpenConnection() == true)
             {
@@ -256,13 +255,9 @@ namespace MovieOrganizer
 
                 //Read the data and store them in the list
 
-                DBConnect tempA = new DBConnect();
-                DBConnect tempB = new DBConnect();
                 while (dataReader.Read())
                 {
-                    List<Actor> actors = tempA.SelectActor("SELECT * FROM WasIn,Actors WHERE WasIn.AID=Actors.AID AND WasIn.MID="+dataReader["MID"]);
-                    List<Genre> genres = tempB.SelectGenres("SELECT * FROM FitsIn,Genres WHERE Genres.GID=FitsIn.GID AND FitsIn.MID=" + dataReader["MID"]);
-                    list.Add(new Movie(Int32.Parse(dataReader["MID"] + ""), dataReader["title"]+"", dataReader["length"] + "", dataReader["director"] + "", dataReader["year"] + "",actors,genres));
+                    output = double.Parse(dataReader["MID"].ToString());
                 }
 
                 //close Data Reader
@@ -272,13 +267,14 @@ namespace MovieOrganizer
                 this.CloseConnection();
 
                 //return list to be displayed
-                return list;
+                return output;
             }
             else
             {
-                return list;
+                return output;
             }
         }
+
 
         /*
         //Count statement
@@ -286,12 +282,10 @@ namespace MovieOrganizer
         {
             return -999;
         }
-
         //Backup
         public void Backup()
         {
         }
-
         //Restore
         public void Restore()
         {

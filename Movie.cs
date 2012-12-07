@@ -92,8 +92,9 @@ namespace MovieOrganizer
 
         void clickedThumbNail(object sender, EventArgs e)
         {
-            Console.Out.WriteLine("test MID:" + MID + " Name:" + title);
+            //Console.Out.WriteLine("test MID:" + MID + " Name:" + title);
             //TODO: make this change the page 
+            HomeForm.self.changeToMoviePage(this);
         }
 
         public static int getNailWidth()
@@ -111,5 +112,50 @@ namespace MovieOrganizer
         {
             return title;
         }
+
+        public List<Actor> getActors()
+        {
+            return Actors;
+        }
+
+        //public Movie(int MID, String title, String length, String director, String year, List<Actor> Actors, List<Genre> Genres)
+        public String getInfo()
+        {
+            String info = "Runtime: " + length + System.Environment.NewLine + System.Environment.NewLine + "Director: " + director + " " + System.Environment.NewLine + System.Environment.NewLine + "Year: " + year + System.Environment.NewLine + System.Environment.NewLine + "Genre: ";
+            for (int i = 0; i < Genres.Count; i++)
+            {
+                if (i == (Genres.Count - 1))
+                {
+                    info += Genres[i].getName();
+                }
+                else
+                {
+                    info += Genres[i].getName() + ", ";
+                }
+            }
+
+            return info;
+        }
+
+        public String getLength()
+        {
+            return length;
+        }
+
+        public String getDirector()
+        {
+            return director;
+        }
+
+        public String getYear()
+        {
+            return year;
+        }
+
+        public List<Genre> getGenres()
+        {
+            return Genres;
+        }
+
     }
 }
