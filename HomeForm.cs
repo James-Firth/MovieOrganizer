@@ -22,7 +22,7 @@ namespace MovieOrganizer
         Panel Profile;
         FlowLayoutPanel thumbNailHolder;
 
-
+        Panel home;
         FlowLayoutPanel pnlMovieInfo;
         //Variables for the search page.
         List<PictureBox> stars;
@@ -50,6 +50,7 @@ namespace MovieOrganizer
             InitializeComponent();
             self = this;
             killForm = true;
+            home = pnlHome;
 
         }
 
@@ -591,11 +592,97 @@ namespace MovieOrganizer
             pnlContent.Controls.Clear();
             //Begin Building next panel
 
+            pnlSearch = new Panel();
+            pnlSearch.Dock = DockStyle.Fill;
+            pnlSearch.AutoScroll = true;
+
+
+            FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
+            topAdvanceBar.BackColor = Color.CornflowerBlue;
+            topAdvanceBar.Height = 40;
+
+            searchTitle = new TextBox();
+            searchDirector = new TextBox();
+            searchYear = new TextBox();
+            searchActor = new TextBox();
+            searchGenre = new TextBox();
+
+            KeyPressEventHandler KeyPress = new KeyPressEventHandler(advance_KeyPress);
+
+            searchTitle.KeyPress += KeyPress;
+            searchDirector.KeyPress += KeyPress;
+            searchYear.KeyPress += KeyPress;
+            searchActor.KeyPress += KeyPress;
+            searchGenre.KeyPress += KeyPress;
+
+
+            Label LBLtitle = new Label();
+            Label LBLdirector = new Label();
+            Label LBLyear = new Label();
+            Label LBLactor = new Label();
+            Label LBLgenre = new Label();
+            Button BTNsubmit = new Button();
+            BTNsubmit.Text = "Advanced Search";
+            BTNsubmit.FlatStyle = FlatStyle.Flat;
+            BTNsubmit.AutoSize = true;
+
+            //Listeners
+            BTNsubmit.Click += new EventHandler(submitAdvanceSearch);
+            searchTitle.Text = title;
+            searchDirector.Text = director;
+            searchYear.Text = year;
+            searchActor.Text = actor;
+            searchGenre.Text = genre;
+
+
+            LBLtitle.Width = 35;
+            LBLdirector.Width = 60;
+            LBLyear.Width = 35;
+            LBLactor.Width = 35;
+            LBLgenre.Width = 40;
+
+            Padding pad = new Padding(5, 10, 0, 10);
+            LBLtitle.Margin = pad;
+            LBLdirector.Margin = pad;
+            LBLyear.Margin = pad;
+            LBLactor.Margin = pad;
+            LBLgenre.Margin = pad;
+
+            searchTitle.Margin = pad;
+            searchDirector.Margin = pad;
+            searchYear.Margin = pad;
+            searchActor.Margin = pad;
+            searchGenre.Margin = pad;
+
+            BTNsubmit.Margin = pad;
+            LBLtitle.Text = "Title:";
+            LBLdirector.Text = "Director:";
+            LBLyear.Text = "Year:";
+            LBLactor.Text = "Actor:";
+            LBLgenre.Text = "Genre:";
+
+            topAdvanceBar.Controls.Add(LBLtitle);
+            topAdvanceBar.Controls.Add(searchTitle);
+
+            topAdvanceBar.Controls.Add(LBLdirector);
+            topAdvanceBar.Controls.Add(searchDirector);
+
+            topAdvanceBar.Controls.Add(LBLyear);
+            topAdvanceBar.Controls.Add(searchYear);
+
+            topAdvanceBar.Controls.Add(LBLactor);
+            topAdvanceBar.Controls.Add(searchActor);
+
+            topAdvanceBar.Controls.Add(LBLgenre);
+            topAdvanceBar.Controls.Add(searchGenre);
+
+            topAdvanceBar.Controls.Add(BTNsubmit);
+
+            topAdvanceBar.Dock = DockStyle.Top;
+
             if (found.Count > 0)
             {
-                pnlSearch = new Panel();
-                pnlSearch.Dock = DockStyle.Fill;
-                pnlSearch.AutoScroll = true;
+                
 
                 thumbNailHolder = new FlowLayoutPanel();
                 thumbNailHolder.BackColor = Color.SteelBlue;
@@ -608,88 +695,7 @@ namespace MovieOrganizer
 
                 this.Resize += new EventHandler(searchSizeChange);
 
-                FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
-                topAdvanceBar.BackColor = Color.CornflowerBlue;
-                topAdvanceBar.Height = 40;
-
-                searchTitle = new TextBox();
-                searchDirector = new TextBox();
-                searchYear = new TextBox();
-                searchActor = new TextBox();
-                searchGenre = new TextBox();
-
-                KeyPressEventHandler KeyPress = new KeyPressEventHandler(advance_KeyPress);
-
-                searchTitle.KeyPress += KeyPress;
-                searchDirector.KeyPress += KeyPress;
-                searchYear.KeyPress += KeyPress;
-                searchActor.KeyPress += KeyPress;
-                searchGenre.KeyPress += KeyPress;
-
-
-                Label LBLtitle = new Label();
-                Label LBLdirector = new Label();
-                Label LBLyear = new Label();
-                Label LBLactor = new Label();
-                Label LBLgenre = new Label();
-                Button BTNsubmit = new Button();
-                BTNsubmit.Text = "Advanced Search";
-                BTNsubmit.FlatStyle = FlatStyle.Flat;
-                BTNsubmit.AutoSize = true;
-
-                //Listeners
-                BTNsubmit.Click += new EventHandler(submitAdvanceSearch);
-                searchTitle.Text = title;
-                searchDirector.Text = director;
-                searchYear.Text = year;
-                searchActor.Text = actor;
-                searchGenre.Text = genre;
-
-
-                LBLtitle.Width = 35;
-                LBLdirector.Width = 60;
-                LBLyear.Width = 35;
-                LBLactor.Width = 35;
-                LBLgenre.Width = 40;
-
-                Padding pad = new Padding(5, 10, 0, 10);
-                LBLtitle.Margin = pad;
-                LBLdirector.Margin = pad;
-                LBLyear.Margin = pad;
-                LBLactor.Margin = pad;
-                LBLgenre.Margin = pad;
-
-                searchTitle.Margin = pad;
-                searchDirector.Margin = pad;
-                searchYear.Margin = pad;
-                searchActor.Margin = pad;
-                searchGenre.Margin = pad;
-
-                BTNsubmit.Margin = pad;
-                LBLtitle.Text = "Title:";
-                LBLdirector.Text = "Director:";
-                LBLyear.Text = "Year:";
-                LBLactor.Text = "Actor:";
-                LBLgenre.Text = "Genre:";
-
-                topAdvanceBar.Controls.Add(LBLtitle);
-                topAdvanceBar.Controls.Add(searchTitle);
-
-                topAdvanceBar.Controls.Add(LBLdirector);
-                topAdvanceBar.Controls.Add(searchDirector);
-
-                topAdvanceBar.Controls.Add(LBLyear);
-                topAdvanceBar.Controls.Add(searchYear);
-
-                topAdvanceBar.Controls.Add(LBLactor);
-                topAdvanceBar.Controls.Add(searchActor);
-
-                topAdvanceBar.Controls.Add(LBLgenre);
-                topAdvanceBar.Controls.Add(searchGenre);
-
-                topAdvanceBar.Controls.Add(BTNsubmit);
-
-                topAdvanceBar.Dock = DockStyle.Top;
+                
 
                 for (int i = 0; i < found.Count; i++)
                 {
@@ -699,27 +705,28 @@ namespace MovieOrganizer
 
 
                 pnlSearch.Controls.Add(thumbNailHolder);
-                pnlSearch.Controls.Add(topAdvanceBar);
+                
 
-                pnlContent.Controls.Add(pnlSearch);
+                
                 //MessageBox.Show(found.Count.ToString());
                 searchSizeChange();
             }
             else
             {
-                Panel temp = new Panel();
-                temp.Height = 400;
-                temp.Width = 800;
+
+                pnlSearch.Height = 400;
+                pnlSearch.Width = 800;
                 Label error = new Label();
-                error.Height = 400;
-                error.Width = 800;
+                error.Dock = DockStyle.Fill;
                 error.TextAlign = ContentAlignment.MiddleCenter;
                 error.ForeColor = Color.White;
                 error.Text = "No results found";
                 lblLocation.Text = "No Search Results found";
-                temp.Controls.Add(error);
-                pnlContent.Controls.Add(temp);
+                pnlSearch.Controls.Add(error);
+                
             }
+            pnlSearch.Controls.Add(topAdvanceBar);
+            pnlContent.Controls.Add(pnlSearch);
         }
         public void submitAdvanceSearch(object sender, EventArgs ee)
         {
@@ -979,17 +986,25 @@ namespace MovieOrganizer
             //profile.ColumnStyles[0] = new ColumnStyle(SizeType.Absolute, (float)500.0);
 
             //left panel
-            Panel userInfo = new Panel();
+            FlowLayoutPanel userInfo = new FlowLayoutPanel();
             userInfo.Width = 425;
             userInfo.Dock = DockStyle.Fill;
+            userInfo.BackColor = Color.SteelBlue;
+            userInfo.FlowDirection = FlowDirection.TopDown;
+
+            Label infoTitle = new Label();
+            infoTitle.Text = "User Infromation:";
+            infoTitle.Font = new Font("Arial", (float)14.0, FontStyle.Bold);
+            infoTitle.ForeColor = Color.White;
+            userInfo.Controls.Add(infoTitle);
+
             Label name = new Label();
             name.ForeColor = Color.White;
             name.AutoSize = true;
-            name.Font = new Font("Arial", (float)14.0, FontStyle.Bold);
-            name.Margin = new Padding(180, 20, 0, 0);
-            userInfo.Padding = new Padding(50);
+            name.Font = new Font("Arial", (float)12.0, FontStyle.Bold);
             name.Text = "Username: "+userName;
-            userInfo.BackColor = Color.SteelBlue;
+
+            
             userInfo.Controls.Add(name);
 
             
@@ -1002,6 +1017,15 @@ namespace MovieOrganizer
             //Adding stuff
             profile.Controls.Add(userInfo, 0, 0);
             profile.Controls.Add(watchlist, 1, 0);
+
+                //Title
+                Label watchTitle = new Label();
+                watchTitle.Text = "Watch List:";
+                watchTitle.Font = new Font("Arial", (float)14.0, FontStyle.Bold);
+                watchTitle.AutoSize = true;
+                watchTitle.ForeColor = Color.White;
+                watchTitle.Dock = DockStyle.Top;
+                
 
                 //ThumbNail
 
@@ -1016,8 +1040,9 @@ namespace MovieOrganizer
                 this.Resize -= new EventHandler(watchSizeChange);
 
                 this.Resize += new EventHandler(watchSizeChange);
-                watchlist.Controls.Add(thumbNailHolder);
-
+                
+            watchlist.Controls.Add(thumbNailHolder);
+            watchlist.Controls.Add(watchTitle);
                 
 
 
@@ -1269,6 +1294,14 @@ namespace MovieOrganizer
         void btnSkip_MouseClick(object sender, MouseEventArgs e)
         {
             changetoRateMovieList();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            lblLocation.Text = "Home";
+            pnlContent.Controls.Clear();
+            removeBreadcrumbs(null, "");
+            pnlContent.Controls.Add(home);
         }
 
     }

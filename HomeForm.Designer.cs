@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.components = new System.ComponentModel.Container();
             this.menuLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
@@ -39,31 +39,27 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlMenus = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.breadcrumbsLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.lblLocation = new System.Windows.Forms.Label();
             this.pnlTopBar = new System.Windows.Forms.Panel();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            this.pnlHome = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuLayout.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlMenus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlTopBar.SuspendLayout();
             this.pnlContent.SuspendLayout();
+            this.pnlHome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picLogo
-            // 
-            this.picLogo.Location = new System.Drawing.Point(-6, 0);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(215, 88);
-            this.picLogo.TabIndex = 4;
-            this.picLogo.TabStop = false;
             // 
             // menuLayout
             // 
@@ -90,7 +86,9 @@
             this.btnHome.Size = new System.Drawing.Size(141, 23);
             this.btnHome.TabIndex = 1;
             this.btnHome.Text = "Home";
+            this.toolTip1.SetToolTip(this.btnHome, "Return to Home screen");
             this.btnHome.UseVisualStyleBackColor = false;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // btnProfile
             // 
@@ -102,6 +100,7 @@
             this.btnProfile.Size = new System.Drawing.Size(141, 23);
             this.btnProfile.TabIndex = 2;
             this.btnProfile.Text = "Profile";
+            this.toolTip1.SetToolTip(this.btnProfile, "View Your Profile");
             this.btnProfile.UseVisualStyleBackColor = false;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
@@ -115,6 +114,7 @@
             this.btnGetRecommends.Size = new System.Drawing.Size(141, 23);
             this.btnGetRecommends.TabIndex = 3;
             this.btnGetRecommends.Text = "Recommend Movies";
+            this.toolTip1.SetToolTip(this.btnGetRecommends, "View movies you would like");
             this.btnGetRecommends.UseVisualStyleBackColor = false;
             this.btnGetRecommends.Click += new System.EventHandler(this.btnGetRecommends_Click);
             // 
@@ -128,6 +128,7 @@
             this.btnNavRate.Size = new System.Drawing.Size(141, 23);
             this.btnNavRate.TabIndex = 4;
             this.btnNavRate.Text = "Rate Movies";
+            this.toolTip1.SetToolTip(this.btnNavRate, "Rate movies to build your preferences");
             this.btnNavRate.UseVisualStyleBackColor = false;
             this.btnNavRate.Click += new System.EventHandler(this.btnNavRate_Click);
             // 
@@ -141,6 +142,7 @@
             this.btnLogout.Size = new System.Drawing.Size(141, 23);
             this.btnLogout.TabIndex = 5;
             this.btnLogout.Text = "Logout";
+            this.toolTip1.SetToolTip(this.btnLogout, "Return to the login screen");
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
@@ -165,6 +167,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(66, 20);
             this.btnSearch.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnSearch, "Search for Movies");
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -181,6 +184,7 @@
             // pnlMenus
             // 
             this.pnlMenus.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.pnlMenus.Controls.Add(this.pictureBox1);
             this.pnlMenus.Controls.Add(this.panel1);
             this.pnlMenus.Controls.Add(this.menuLayout);
             this.pnlMenus.Controls.Add(this.picLogo);
@@ -189,6 +193,25 @@
             this.pnlMenus.Name = "pnlMenus";
             this.pnlMenus.Size = new System.Drawing.Size(209, 648);
             this.pnlMenus.TabIndex = 8;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Image = global::MovieOrganizer.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(54, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.Location = new System.Drawing.Point(-6, 0);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(215, 88);
+            this.picLogo.TabIndex = 4;
+            this.picLogo.TabStop = false;
             // 
             // breadcrumbsLayout
             // 
@@ -227,101 +250,56 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlContent.BackColor = System.Drawing.Color.SteelBlue;
-            this.pnlContent.Controls.Add(this.button6);
-            this.pnlContent.Controls.Add(this.button5);
-            this.pnlContent.Controls.Add(this.button4);
-            this.pnlContent.Controls.Add(this.button3);
-            this.pnlContent.Controls.Add(this.button2);
-            this.pnlContent.Controls.Add(this.button1);
+            this.pnlContent.Controls.Add(this.pnlHome);
             this.pnlContent.Location = new System.Drawing.Point(207, 78);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(893, 570);
             this.pnlContent.TabIndex = 6;
             // 
-            // button6
+            // pnlHome
             // 
-            this.button6.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(358, 283);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(276, 100);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "TEST: SHOW MOVIE PAGE";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.pnlHome.Controls.Add(this.pictureBox2);
+            this.pnlHome.Controls.Add(this.label2);
+            this.pnlHome.Controls.Add(this.label1);
+            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlHome.Location = new System.Drawing.Point(0, 0);
+            this.pnlHome.Name = "pnlHome";
+            this.pnlHome.Size = new System.Drawing.Size(893, 570);
+            this.pnlHome.TabIndex = 0;
             // 
-            // button5
+            // pictureBox2
             // 
-            this.button5.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(73, 283);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(276, 100);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "TEST: FIND A MOVIE LIKE AMAZON";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.pictureBox2.Image = global::MovieOrganizer.Properties.Resources.Flat_for_Linux_Movies_42_Movies_256x256_png_256x256;
+            this.pictureBox2.Location = new System.Drawing.Point(185, 229);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(256, 256);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
             // 
-            // button4
+            // label2
             // 
-            this.button4.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(358, 174);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(276, 100);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "TEST: Retrieve all genres";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(44, 105);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(525, 60);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "To search for movies, use the search bar in the top left.\r\n\r\n<-To get recommendat" +
+    "ions and rate movies, check out the links to the left";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button3
+            // label1
             // 
-            this.button3.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(358, 65);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(276, 100);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Test: Add diff Breadcrumbs";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(73, 174);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(276, 100);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Test: remove Breadcrumbs";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(73, 65);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(276, 100);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Test: Add Breadcrumbs";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(160, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(281, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Welcome to the MovieOrganizer";
             // 
             // HomeForm
             // 
@@ -333,16 +311,20 @@
             this.Controls.Add(this.pnlMenus);
             this.Controls.Add(this.pnlContent);
             this.Name = "HomeForm";
-            this.Text = "MainForm";
+            this.Text = "MovieOrganizer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.menuLayout.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlMenus.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlTopBar.ResumeLayout(false);
             this.pnlTopBar.PerformLayout();
             this.pnlContent.ResumeLayout(false);
+            this.pnlHome.ResumeLayout(false);
+            this.pnlHome.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -364,12 +346,12 @@
         private System.Windows.Forms.Label lblLocation;
         private System.Windows.Forms.Panel pnlTopBar;
         private System.Windows.Forms.Panel pnlContent;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel pnlHome;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolTip toolTip1;
 
 
     }

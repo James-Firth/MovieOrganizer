@@ -39,7 +39,11 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.errMistmatch = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblMismatch = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errMistmatch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -144,12 +148,48 @@
             this.lblMismatch.Text = "Passwords do not match!";
             this.lblMismatch.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(84, 83);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(147, 16);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Register an Account";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Location = new System.Drawing.Point(114, 32);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(117, 16);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "MovieOrganizer";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Image = global::MovieOrganizer.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(34, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(314, 349);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblMismatch);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnRegister);
@@ -161,9 +201,10 @@
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "RegisterForm";
-            this.Text = "RegisterForm";
+            this.Text = "Register";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.errMistmatch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +222,8 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.ErrorProvider errMistmatch;
         private System.Windows.Forms.Label lblMismatch;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

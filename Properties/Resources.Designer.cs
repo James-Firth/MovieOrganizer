@@ -66,5 +66,19 @@ namespace MovieOrganizer.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap Flat_for_Linux_Movies_42_Movies_256x256_png_256x256 {
+            get {
+                object obj = ResourceManager.GetObject("Flat_for_Linux-Movies-42-Movies_256x256.png-256x256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap logo {
+            get {
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
