@@ -19,7 +19,7 @@ namespace MovieOrganizer
 
         Panel pnlSearch;
         Panel pnlRec;
-        
+        Panel Profile;
         FlowLayoutPanel thumbNailHolder;
 
 
@@ -88,6 +88,11 @@ namespace MovieOrganizer
                     
 
                 }
+                else if (temp.Contains("Profile"))
+                {
+                    changetoProfilePage();
+                    lblLocation.Text = temp;
+                }
                 else
                 {
                     //MessageBox.Show("MOVIE INFO LINK: " + loc + " + " + loc.Substring(0, 7));
@@ -117,7 +122,7 @@ namespace MovieOrganizer
                 btnCurrLocation.AutoEllipsis = true;
                 btnCurrLocation.Text = label + " -->";
                 btnCurrLocation.FlatStyle = FlatStyle.Flat;
-                btnCurrLocation.BackColor = Color.LightSkyBlue;
+                btnCurrLocation.BackColor = Color.CornflowerBlue;
                 btnCurrLocation.ForeColor = Color.White;
                 btnCurrLocation.FlatAppearance.BorderSize = 0;
                 btnCurrLocation.Name = label;
@@ -578,118 +583,136 @@ namespace MovieOrganizer
         {
             pnlContent.Controls.Clear();
             //Begin Building next panel
-            
-            pnlSearch = new Panel();
-            pnlSearch.Dock = DockStyle.Fill;
-            pnlSearch.AutoScroll = true;
 
-            thumbNailHolder = new FlowLayoutPanel();
-            thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
-            thumbNailHolder.Dock = DockStyle.Top;
-            thumbNailHolder.Height = 1000;
-
-            this.Resize -= new EventHandler(searchSizeChange);
-            this.Resize -= new EventHandler(recSizeChange);
-            this.Resize -= new EventHandler(watchSizeChange);
-
-            this.Resize += new EventHandler(searchSizeChange);
-
-            FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
-            topAdvanceBar.BackColor = Color.Red;
-            topAdvanceBar.Height = 40;
-
-            searchTitle = new TextBox();
-            searchDirector = new TextBox();
-            searchYear = new TextBox();
-            searchActor = new TextBox();
-            searchGenre = new TextBox();
-
-            KeyPressEventHandler KeyPress = new KeyPressEventHandler(advance_KeyPress);
-
-            searchTitle.KeyPress +=     KeyPress;
-            searchDirector.KeyPress +=  KeyPress;
-            searchYear.KeyPress +=      KeyPress;
-            searchActor.KeyPress +=     KeyPress;
-            searchGenre.KeyPress +=     KeyPress;
-
-
-            Label LBLtitle = new Label();
-            Label LBLdirector = new Label();
-            Label LBLyear = new Label();
-            Label LBLactor = new Label();
-            Label LBLgenre = new Label();
-            Button BTNsubmit = new Button();
-            BTNsubmit.Text = "Advanced Search";
-            BTNsubmit.FlatStyle = FlatStyle.Flat;
-            BTNsubmit.AutoSize = true;
-
-            //Listeners
-            BTNsubmit.Click += new EventHandler(submitAdvanceSearch);
-            searchTitle.Text = title;
-            searchDirector.Text = director;
-            searchYear.Text = year;
-            searchActor.Text = actor;
-            searchGenre.Text = genre;
-
-
-            LBLtitle.Width = 35;
-            LBLdirector.Width = 60;
-            LBLyear.Width = 35;
-            LBLactor.Width = 35;
-            LBLgenre.Width = 40;
-
-            Padding pad = new Padding(5, 10, 0, 10);
-            LBLtitle.Margin = pad;
-            LBLdirector.Margin = pad;
-            LBLyear.Margin = pad;
-            LBLactor.Margin = pad;
-            LBLgenre.Margin = pad;
-
-            searchTitle.Margin = pad;
-            searchDirector.Margin = pad;
-            searchYear.Margin = pad;
-            searchActor.Margin = pad;
-            searchGenre.Margin = pad;
-
-            BTNsubmit.Margin = pad;
-            LBLtitle.Text = "Title:";
-            LBLdirector.Text = "Director:";
-            LBLyear.Text = "Year:";
-            LBLactor.Text = "Actor:";
-            LBLgenre.Text = "Genre:";
-
-            topAdvanceBar.Controls.Add(LBLtitle);
-            topAdvanceBar.Controls.Add(searchTitle);
-
-            topAdvanceBar.Controls.Add(LBLdirector);
-            topAdvanceBar.Controls.Add(searchDirector);
-
-            topAdvanceBar.Controls.Add(LBLyear);
-            topAdvanceBar.Controls.Add(searchYear);
-
-            topAdvanceBar.Controls.Add(LBLactor);
-            topAdvanceBar.Controls.Add(searchActor);
-
-            topAdvanceBar.Controls.Add(LBLgenre);
-            topAdvanceBar.Controls.Add(searchGenre);
-
-            topAdvanceBar.Controls.Add(BTNsubmit);
-
-            topAdvanceBar.Dock = DockStyle.Top;
-
-            for (int i = 0; i < found.Count; i++)
+            if (found.Count > 0)
             {
-                thumbNailHolder.Controls.Add(found[i].buildThumbnailPanel());
+                pnlSearch = new Panel();
+                pnlSearch.Dock = DockStyle.Fill;
+                pnlSearch.AutoScroll = true;
+
+                thumbNailHolder = new FlowLayoutPanel();
+                thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
+                thumbNailHolder.Dock = DockStyle.Top;
+                thumbNailHolder.Height = 1000;
+
+                this.Resize -= new EventHandler(searchSizeChange);
+                this.Resize -= new EventHandler(recSizeChange);
+                this.Resize -= new EventHandler(watchSizeChange);
+
+                this.Resize += new EventHandler(searchSizeChange);
+
+                FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
+                topAdvanceBar.BackColor = Color.Red;
+                topAdvanceBar.Height = 40;
+
+                searchTitle = new TextBox();
+                searchDirector = new TextBox();
+                searchYear = new TextBox();
+                searchActor = new TextBox();
+                searchGenre = new TextBox();
+
+                KeyPressEventHandler KeyPress = new KeyPressEventHandler(advance_KeyPress);
+
+                searchTitle.KeyPress += KeyPress;
+                searchDirector.KeyPress += KeyPress;
+                searchYear.KeyPress += KeyPress;
+                searchActor.KeyPress += KeyPress;
+                searchGenre.KeyPress += KeyPress;
+
+
+                Label LBLtitle = new Label();
+                Label LBLdirector = new Label();
+                Label LBLyear = new Label();
+                Label LBLactor = new Label();
+                Label LBLgenre = new Label();
+                Button BTNsubmit = new Button();
+                BTNsubmit.Text = "Advanced Search";
+                BTNsubmit.FlatStyle = FlatStyle.Flat;
+                BTNsubmit.AutoSize = true;
+
+                //Listeners
+                BTNsubmit.Click += new EventHandler(submitAdvanceSearch);
+                searchTitle.Text = title;
+                searchDirector.Text = director;
+                searchYear.Text = year;
+                searchActor.Text = actor;
+                searchGenre.Text = genre;
+
+
+                LBLtitle.Width = 35;
+                LBLdirector.Width = 60;
+                LBLyear.Width = 35;
+                LBLactor.Width = 35;
+                LBLgenre.Width = 40;
+
+                Padding pad = new Padding(5, 10, 0, 10);
+                LBLtitle.Margin = pad;
+                LBLdirector.Margin = pad;
+                LBLyear.Margin = pad;
+                LBLactor.Margin = pad;
+                LBLgenre.Margin = pad;
+
+                searchTitle.Margin = pad;
+                searchDirector.Margin = pad;
+                searchYear.Margin = pad;
+                searchActor.Margin = pad;
+                searchGenre.Margin = pad;
+
+                BTNsubmit.Margin = pad;
+                LBLtitle.Text = "Title:";
+                LBLdirector.Text = "Director:";
+                LBLyear.Text = "Year:";
+                LBLactor.Text = "Actor:";
+                LBLgenre.Text = "Genre:";
+
+                topAdvanceBar.Controls.Add(LBLtitle);
+                topAdvanceBar.Controls.Add(searchTitle);
+
+                topAdvanceBar.Controls.Add(LBLdirector);
+                topAdvanceBar.Controls.Add(searchDirector);
+
+                topAdvanceBar.Controls.Add(LBLyear);
+                topAdvanceBar.Controls.Add(searchYear);
+
+                topAdvanceBar.Controls.Add(LBLactor);
+                topAdvanceBar.Controls.Add(searchActor);
+
+                topAdvanceBar.Controls.Add(LBLgenre);
+                topAdvanceBar.Controls.Add(searchGenre);
+
+                topAdvanceBar.Controls.Add(BTNsubmit);
+
+                topAdvanceBar.Dock = DockStyle.Top;
+
+                for (int i = 0; i < found.Count; i++)
+                {
+                    thumbNailHolder.Controls.Add(found[i].buildThumbnailPanel());
+                }
+                numberOfthumbNails = found.Count;
+
+
+                pnlSearch.Controls.Add(thumbNailHolder);
+                pnlSearch.Controls.Add(topAdvanceBar);
+
+                pnlContent.Controls.Add(pnlSearch);
+                //MessageBox.Show(found.Count.ToString());
+                searchSizeChange();
             }
-            numberOfthumbNails = found.Count;
-
-            
-            pnlSearch.Controls.Add(thumbNailHolder);
-            pnlSearch.Controls.Add(topAdvanceBar);
-
-            pnlContent.Controls.Add(pnlSearch);
-            //MessageBox.Show(found.Count.ToString());
-            searchSizeChange();
+            else
+            {
+                Panel temp = new Panel();
+                temp.Height = 400;
+                temp.Width = 800;
+                Label error = new Label();
+                error.Height = 400;
+                error.Width = 800;
+                error.TextAlign = ContentAlignment.MiddleCenter;
+                error.ForeColor = Color.White;
+                error.Text = "No results found";
+                lblLocation.Text = "No Search Results found";
+                temp.Controls.Add(error);
+                pnlContent.Controls.Add(temp);
+            }
         }
         public void submitAdvanceSearch(object sender, EventArgs ee)
         {
@@ -718,13 +741,15 @@ namespace MovieOrganizer
         public List<Movie> Search(String searchTerm)
         {
             DBConnect helper = new DBConnect();
-            List<Movie> movies = helper.SelectMovie("SELECT * FROM Movies WHERE title LIKE '%" + searchTerm + "%'");
-            /*
-            if(movies.Count != 0)
-                MessageBox.Show(movies[0].ToString());
+            List<Movie> movies;
+            if (searchTerm.Length > 2)
+            {
+                movies = helper.SelectMovie("SELECT * FROM Movies WHERE title LIKE '%" + searchTerm + "%'");
+            }
             else
-                MessageBox.Show("Nothing found...?");
-            */
+            {
+                movies = new List<Movie>();
+            }
             return movies;
         }
         private List<Movie> Search(string title, string director, string year, string genre, string actor)
@@ -774,8 +799,8 @@ namespace MovieOrganizer
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                
-                changeToSearchPage(txtSearch.Text);
+                if(txtSearch.Text.Length > 0)
+                    changeToSearchPage(txtSearch.Text);
             }
         }
 
@@ -857,37 +882,56 @@ namespace MovieOrganizer
 
         void changeToRecPage(List<Movie> found)
         {
-            pnlContent.Controls.Clear();
-            //Begin Building next panel
-            
-            pnlRec = new Panel();
-            pnlRec.Dock = DockStyle.Fill;
-            pnlRec.AutoScroll = true;
-
-            thumbNailHolder = new FlowLayoutPanel();
-            thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
-            thumbNailHolder.Dock = DockStyle.Top;
-            thumbNailHolder.Height = 1000;
-
-
-            this.Resize -= new EventHandler(searchSizeChange);
-            this.Resize -= new EventHandler(recSizeChange);
-            this.Resize -= new EventHandler(watchSizeChange);
-
-            this.Resize += new EventHandler(recSizeChange);
-
-            for (int i = 0; i < found.Count; i++)
+            if (found.Count > 0)
             {
-                thumbNailHolder.Controls.Add(found[i].bildThumbnailWatchPanel());
+                pnlContent.Controls.Clear();
+                //Begin Building next panel
+
+                pnlRec = new Panel();
+                pnlRec.Dock = DockStyle.Fill;
+                pnlRec.AutoScroll = true;
+
+                thumbNailHolder = new FlowLayoutPanel();
+                thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
+                thumbNailHolder.Dock = DockStyle.Top;
+                thumbNailHolder.Height = 1000;
+
+
+                this.Resize -= new EventHandler(searchSizeChange);
+                this.Resize -= new EventHandler(recSizeChange);
+                this.Resize -= new EventHandler(watchSizeChange);
+
+                this.Resize += new EventHandler(recSizeChange);
+
+                for (int i = 0; i < found.Count; i++)
+                {
+                    thumbNailHolder.Controls.Add(found[i].bildThumbnailWatchPanel());
+                }
+                numberOfthumbNails = found.Count;
+
+
+                pnlRec.Controls.Add(thumbNailHolder);
+
+                pnlContent.Controls.Add(pnlRec);
+                //MessageBox.Show(found.Count.ToString());
+                recSizeChange();
             }
-            numberOfthumbNails = found.Count;
-
-
-            pnlRec.Controls.Add(thumbNailHolder);
-
-            pnlContent.Controls.Add(pnlRec);
-            //MessageBox.Show(found.Count.ToString());
-            recSizeChange();
+            else
+            {
+                pnlContent.Controls.Clear();
+                Panel temp = new Panel();
+                temp.Height = 400;
+                temp.Width = 800;
+                Label error = new Label();
+                error.Height = 400;
+                error.Width = 800;
+                error.TextAlign = ContentAlignment.MiddleCenter;
+                error.ForeColor = Color.White;
+                error.Text = "No Recommendations found. \r\n Please Rate some movies (button to the left).";
+                lblLocation.Text = "No Recommendations found";
+                temp.Controls.Add(error);
+                pnlContent.Controls.Add(temp);
+            }
         }
 
 
@@ -908,8 +952,11 @@ namespace MovieOrganizer
         public void changetoProfilePage()
         {
             pnlContent.Controls.Clear();
-            lblLocation.Text = "Profile";
+
             TableLayoutPanel profile = new TableLayoutPanel();
+            removeBreadcrumbs(null, "");
+            addBreadrumbs(profile, "Profile");
+            lblLocation.Text = "Profile";
             
 
             //styling
@@ -983,9 +1030,6 @@ namespace MovieOrganizer
             }
             numberOfthumbNails = found.Count;
 
-
-            
-
             //MessageBox.Show(found.Count.ToString());
             watchSizeChange();
 
@@ -1010,122 +1054,126 @@ namespace MovieOrganizer
 
         private void btnNavRate_Click(object sender, EventArgs e)
         {
-            ratingsDone = 0;
+            ratingsDone = 5;
             changetoRateMovieList();
         }
 
         public void changetoRateMovieList()
         {
-            pnlContent.Controls.Clear();
+            if (ratingsDone > 0)
+            {
+                removeBreadcrumbs(null, "");
+                lblLocation.Text = "Rating Movies";
+                pnlContent.Controls.Clear();
 
 
-            DBConnect helper = new DBConnect();
-            Movie theMovie = helper.selectRandomMovies(1)[0];
-            currMovie = theMovie;
-            
-            //Panel pnlRate = new Panel();
-            //pnlRate.Controls.Add(theMovie.buildThumbnailPanel());
-           // pnlRate.Dock = DockStyle.Fill;
+                DBConnect helper = new DBConnect();
+                Movie theMovie = helper.selectRandomMovies(1)[0];
+                currMovie = theMovie;
 
-            //Add left column contents
-            FlowLayoutPanel leftCol = new FlowLayoutPanel();
-            leftCol.Padding = new Padding(0);
-            leftCol.Dock = DockStyle.Fill;
-            leftCol.FlowDirection = FlowDirection.TopDown;
+                //Panel pnlRate = new Panel();
+                //pnlRate.Controls.Add(theMovie.buildThumbnailPanel());
+                // pnlRate.Dock = DockStyle.Fill;
 
-
-            //Create area for ratings
-            FlowLayoutPanel ratings = new FlowLayoutPanel();
-            ratings.Margin = new Padding(22, 0, 0, 0);
-            //ratings.Height = 550;
-            //ratings.Width = 550;
-            ratings.FlowDirection = FlowDirection.LeftToRight;
-            ratings.Padding = new Padding(0);
-            ratings.BackColor = Color.SteelBlue;
-            PictureBox starOne = new PictureBox();
-            PictureBox starTwo = new PictureBox();
-            PictureBox starThree = new PictureBox();
-            PictureBox starFour = new PictureBox();
-            PictureBox starFive = new PictureBox();
-            starOne.Size = new Size(25, 26);
-            starTwo.Size = new Size(25, 26);
-            starThree.Size = new Size(25, 26);
-            starFour.Size = new Size(25, 26);
-            starFive.Size = new Size(25, 26);
-
-            starOne.Margin = new Padding(3);
-            starTwo.Margin = new Padding(3);
-            starThree.Margin = new Padding(3);
-            starFour.Margin = new Padding(3);
-            starFive.Margin = new Padding(3);
-
-            starOne.Padding = new Padding(0);
-            starTwo.Padding = new Padding(0);
-            starThree.Padding = new Padding(0);
-            starFour.Padding = new Padding(0);
-            starFive.Padding = new Padding(0);
-
-            starOne.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
-            starTwo.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
-            starThree.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
-            starFour.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
-            starFive.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
-
-            stars = new List<PictureBox>();
-            stars.Add(starOne);
-            stars.Add(starTwo);
-            stars.Add(starThree);
-            stars.Add(starFour);
-            stars.Add(starFive);
+                //Add left column contents
+                FlowLayoutPanel leftCol = new FlowLayoutPanel();
+                leftCol.Padding = new Padding(0);
+                leftCol.Dock = DockStyle.Fill;
+                leftCol.FlowDirection = FlowDirection.TopDown;
 
 
-            //Event listeners
-            ratings.MouseLeave += new EventHandler(ratings_MouseLeave);
+                //Create area for ratings
+                FlowLayoutPanel ratings = new FlowLayoutPanel();
+                ratings.Margin = new Padding(22, 0, 0, 0);
+                //ratings.Height = 550;
+                //ratings.Width = 550;
+                ratings.FlowDirection = FlowDirection.LeftToRight;
+                ratings.Padding = new Padding(0);
+                ratings.BackColor = Color.SteelBlue;
+                PictureBox starOne = new PictureBox();
+                PictureBox starTwo = new PictureBox();
+                PictureBox starThree = new PictureBox();
+                PictureBox starFour = new PictureBox();
+                PictureBox starFive = new PictureBox();
+                starOne.Size = new Size(25, 26);
+                starTwo.Size = new Size(25, 26);
+                starThree.Size = new Size(25, 26);
+                starFour.Size = new Size(25, 26);
+                starFive.Size = new Size(25, 26);
 
-           starOne.MouseEnter += new EventHandler(oneStar_MouseEnter);
-           starTwo.MouseEnter += new EventHandler(twoStar_MouseEnter);
-           starThree.MouseEnter += new EventHandler(threeStar_MouseEnter);
-          starFour.MouseEnter += new EventHandler(fourStar_MouseEnter);
-          starFive.MouseEnter += new EventHandler(fiveStar_MouseEnter);
+                starOne.Margin = new Padding(3);
+                starTwo.Margin = new Padding(3);
+                starThree.Margin = new Padding(3);
+                starFour.Margin = new Padding(3);
+                starFive.Margin = new Padding(3);
 
-          starOne.MouseClick += new MouseEventHandler(starOne_MouseClick);
-          starTwo.MouseClick += new MouseEventHandler(starTwo_MouseClick);
-          starThree.MouseClick += new MouseEventHandler(starThree_MouseClick);
-          starFour.MouseClick += new MouseEventHandler(starFour_MouseClick);
-          starFive.MouseClick += new MouseEventHandler(starFive_MouseClick);
+                starOne.Padding = new Padding(0);
+                starTwo.Padding = new Padding(0);
+                starThree.Padding = new Padding(0);
+                starFour.Padding = new Padding(0);
+                starFive.Padding = new Padding(0);
 
-            Button btnSkip = new Button();
-            btnSkip.MouseClick += new MouseEventHandler(btnSkip_MouseClick);
-            btnSkip.Text = "Skip";
-            btnSkip.BackColor = Color.LightSkyBlue;
-            btnSkip.ForeColor = Color.White;
-            btnSkip.Width = 150;
-            btnSkip.FlatStyle = FlatStyle.Flat;
+                starOne.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                starTwo.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                starThree.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                starFour.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+                starFive.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
 
-            Label lblRatingsLeft = new Label();
-            lblRatingsLeft.ForeColor = Color.White;
-            lblRatingsLeft.Text = (5 - ratingsDone).ToString() + " ratings to go.";
-
-
-            //Add to panels
-            ratings.Controls.Add(starOne);
-            ratings.Controls.Add(starTwo);
-            ratings.Controls.Add(starThree);
-            ratings.Controls.Add(starFour);
-            ratings.Controls.Add(starFive);
-            ratings.Controls.Add(btnSkip);
-            
+                stars = new List<PictureBox>();
+                stars.Add(starOne);
+                stars.Add(starTwo);
+                stars.Add(starThree);
+                stars.Add(starFour);
+                stars.Add(starFive);
 
 
-            leftCol.Controls.Add(theMovie.buildThumbnailPanel()); //add thumbnails
+                //Event listeners
+                ratings.MouseLeave += new EventHandler(ratings_MouseLeave);
 
-            leftCol.Controls.Add(ratings);
+                starOne.MouseEnter += new EventHandler(oneStar_MouseEnter);
+                starTwo.MouseEnter += new EventHandler(twoStar_MouseEnter);
+                starThree.MouseEnter += new EventHandler(threeStar_MouseEnter);
+                starFour.MouseEnter += new EventHandler(fourStar_MouseEnter);
+                starFive.MouseEnter += new EventHandler(fiveStar_MouseEnter);
 
-            leftCol.Controls.Add(lblRatingsLeft);
+                starOne.MouseClick += new MouseEventHandler(starOne_MouseClick);
+                starTwo.MouseClick += new MouseEventHandler(starTwo_MouseClick);
+                starThree.MouseClick += new MouseEventHandler(starThree_MouseClick);
+                starFour.MouseClick += new MouseEventHandler(starFour_MouseClick);
+                starFive.MouseClick += new MouseEventHandler(starFive_MouseClick);
 
-            pnlContent.Controls.Add(leftCol);
-            //pnlRate.Controls.Add(leftCol);
+                Button btnSkip = new Button();
+                btnSkip.MouseClick += new MouseEventHandler(btnSkip_MouseClick);
+                btnSkip.Text = "Skip";
+                btnSkip.BackColor = Color.LightSkyBlue;
+                btnSkip.ForeColor = Color.White;
+                btnSkip.Width = 150;
+                btnSkip.FlatStyle = FlatStyle.Flat;
 
+                Label lblRatingsLeft = new Label();
+                lblRatingsLeft.ForeColor = Color.White;
+                lblRatingsLeft.Text = (ratingsDone).ToString() + " ratings to go.";
+
+
+                //Add to panels
+                ratings.Controls.Add(starOne);
+                ratings.Controls.Add(starTwo);
+                ratings.Controls.Add(starThree);
+                ratings.Controls.Add(starFour);
+                ratings.Controls.Add(starFive);
+                ratings.Controls.Add(btnSkip);
+
+
+
+                leftCol.Controls.Add(theMovie.buildThumbnailPanel()); //add thumbnails
+
+                leftCol.Controls.Add(ratings);
+
+                leftCol.Controls.Add(lblRatingsLeft);
+
+                pnlContent.Controls.Add(leftCol);
+                //pnlRate.Controls.Add(leftCol);
+            }
 
         }
 
