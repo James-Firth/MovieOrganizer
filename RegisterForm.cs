@@ -67,7 +67,10 @@ namespace MovieOrganizer
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-
+            if (txtboxConfirmPassword.Text.Length < 2)
+            {
+                MessageBox.Show("Enter a longer password");
+            }
             if (passValid)
             {
                 DBConnect connector = new DBConnect();

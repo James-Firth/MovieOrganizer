@@ -32,11 +32,9 @@
             this.menuLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
-            this.btnWatchlist = new System.Windows.Forms.Button();
             this.btnGetRecommends = new System.Windows.Forms.Button();
             this.btnNavRate = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -71,11 +69,9 @@
             // 
             this.menuLayout.Controls.Add(this.btnHome);
             this.menuLayout.Controls.Add(this.btnProfile);
-            this.menuLayout.Controls.Add(this.btnWatchlist);
             this.menuLayout.Controls.Add(this.btnGetRecommends);
             this.menuLayout.Controls.Add(this.btnNavRate);
             this.menuLayout.Controls.Add(this.btnLogout);
-            this.menuLayout.Controls.Add(this.button7);
             this.menuLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.menuLayout.Location = new System.Drawing.Point(3, 159);
             this.menuLayout.Name = "menuLayout";
@@ -109,28 +105,16 @@
             this.btnProfile.UseVisualStyleBackColor = false;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
-            // btnWatchlist
-            // 
-            this.btnWatchlist.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnWatchlist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWatchlist.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnWatchlist.Location = new System.Drawing.Point(23, 61);
-            this.btnWatchlist.Name = "btnWatchlist";
-            this.btnWatchlist.Size = new System.Drawing.Size(141, 23);
-            this.btnWatchlist.TabIndex = 6;
-            this.btnWatchlist.Text = "View Watchlist";
-            this.btnWatchlist.UseVisualStyleBackColor = false;
-            // 
             // btnGetRecommends
             // 
             this.btnGetRecommends.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnGetRecommends.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGetRecommends.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnGetRecommends.Location = new System.Drawing.Point(23, 90);
+            this.btnGetRecommends.Location = new System.Drawing.Point(23, 61);
             this.btnGetRecommends.Name = "btnGetRecommends";
             this.btnGetRecommends.Size = new System.Drawing.Size(141, 23);
             this.btnGetRecommends.TabIndex = 3;
-            this.btnGetRecommends.Text = "Recommend Me a Movie";
+            this.btnGetRecommends.Text = "Recommend Movies";
             this.btnGetRecommends.UseVisualStyleBackColor = false;
             this.btnGetRecommends.Click += new System.EventHandler(this.btnGetRecommends_Click);
             // 
@@ -139,38 +123,26 @@
             this.btnNavRate.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnNavRate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNavRate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNavRate.Location = new System.Drawing.Point(23, 119);
+            this.btnNavRate.Location = new System.Drawing.Point(23, 90);
             this.btnNavRate.Name = "btnNavRate";
             this.btnNavRate.Size = new System.Drawing.Size(141, 23);
             this.btnNavRate.TabIndex = 4;
             this.btnNavRate.Text = "Rate Movies";
             this.btnNavRate.UseVisualStyleBackColor = false;
+            this.btnNavRate.Click += new System.EventHandler(this.btnNavRate_Click);
             // 
             // btnLogout
             // 
             this.btnLogout.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogout.Location = new System.Drawing.Point(23, 148);
+            this.btnLogout.Location = new System.Drawing.Point(23, 119);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(141, 23);
             this.btnLogout.TabIndex = 5;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button7.Location = new System.Drawing.Point(23, 177);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(141, 23);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "TEST CLEAR CONTENT PANEL";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // panel1
             // 
@@ -381,11 +353,9 @@
         private System.Windows.Forms.FlowLayoutPanel menuLayout;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Button btnProfile;
-        private System.Windows.Forms.Button btnWatchlist;
         private System.Windows.Forms.Button btnGetRecommends;
         private System.Windows.Forms.Button btnNavRate;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;

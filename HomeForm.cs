@@ -36,14 +36,17 @@ namespace MovieOrganizer
         int movieRating;
         bool userRated;
         bool killForm;
+        int ratingsDone;
         public static int UID;
+        String userName;
 
         public static HomeForm self;
 
-        public HomeForm(object sender,int loginUID)
+        public HomeForm(object sender,int loginUID, String uName)
         {
             login = (Form)sender;
             UID = loginUID;
+            userName = uName;
             InitializeComponent();
             self = this;
             killForm = true;
@@ -587,6 +590,7 @@ namespace MovieOrganizer
 
             this.Resize -= new EventHandler(searchSizeChange);
             this.Resize -= new EventHandler(recSizeChange);
+            this.Resize -= new EventHandler(watchSizeChange);
 
             this.Resize += new EventHandler(searchSizeChange);
 
@@ -842,7 +846,7 @@ namespace MovieOrganizer
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-
+            changetoProfilePage();
         }
 
         private void btnGetRecommends_Click(object sender, EventArgs e)
@@ -868,6 +872,7 @@ namespace MovieOrganizer
 
             this.Resize -= new EventHandler(searchSizeChange);
             this.Resize -= new EventHandler(recSizeChange);
+            this.Resize -= new EventHandler(watchSizeChange);
 
             this.Resize += new EventHandler(recSizeChange);
 
@@ -898,6 +903,272 @@ namespace MovieOrganizer
             Console.Out.WriteLine("W=" + width + " numPer = " + numPerLine);
             int numLines = (int)Math.Ceiling(numNails / (double)numPerLine);
             thumbNailHolder.Height = numLines * Movie.getNailWatchHeight();
+        }
+
+        public void changetoProfilePage()
+        {
+            pnlContent.Controls.Clear();
+            lblLocation.Text = "Profile";
+            TableLayoutPanel profile = new TableLayoutPanel();
+            
+
+            //styling
+            profile.Dock = DockStyle.Fill;
+            profile.RowCount = 1;
+            profile.ColumnCount = 2;
+            profile.BackColor = Color.CornflowerBlue;
+            //profile.ColumnStyles[0] = new ColumnStyle(SizeType.Absolute, (float)500.0);
+
+            //left panel
+            Panel userInfo = new Panel();
+            userInfo.Width = 425;
+            userInfo.Dock = DockStyle.Fill;
+            Label name = new Label();
+            name.ForeColor = Color.White;
+            name.AutoSize = true;
+            name.Font = new Font("Arial", (float)14.0, FontStyle.Bold);
+            name.Margin = new Padding(180, 20, 0, 0);
+            userInfo.Padding = new Padding(50);
+            name.Text = "Username: "+userName;
+            userInfo.BackColor = Color.SteelBlue;
+            userInfo.Controls.Add(name);
+
+            
+
+            //right panel
+            Panel watchlist = new Panel();
+            watchlist.Dock = DockStyle.Fill;
+            watchlist.BackColor = Color.CornflowerBlue;
+            watchlist.AutoScroll = true;
+            //Adding stuff
+            profile.Controls.Add(userInfo, 0, 0);
+            profile.Controls.Add(watchlist, 1, 0);
+
+                //ThumbNail
+
+                thumbNailHolder = new FlowLayoutPanel();
+                thumbNailHolder.BackColor = Color.CornflowerBlue;
+                thumbNailHolder.Dock = DockStyle.Top;
+                thumbNailHolder.Height = 1000;
+
+
+                this.Resize -= new EventHandler(searchSizeChange);
+                this.Resize -= new EventHandler(recSizeChange);
+                this.Resize -= new EventHandler(watchSizeChange);
+
+                this.Resize += new EventHandler(watchSizeChange);
+                watchlist.Controls.Add(thumbNailHolder);
+
+                
+
+
+
+
+
+
+            //Add all this to the content panel
+            pnlContent.Controls.Add(profile);
+
+
+
+
+            //Populate Wish List
+            
+            DBConnect helper = new DBConnect();
+            List<Movie> found = helper.selectMoviesFromWatchList(UID);
+            
+            for (int i = 0; i < found.Count; i++)
+            {
+                thumbNailHolder.Controls.Add(found[i].bildThumbnailWatchPanel());
+            }
+            numberOfthumbNails = found.Count;
+
+
+            
+
+            //MessageBox.Show(found.Count.ToString());
+            watchSizeChange();
+
+
+        }
+
+
+        public void watchSizeChange(object sender, EventArgs ee)
+        {
+            watchSizeChange();
+        }
+
+        public void watchSizeChange()
+        {
+            int numNails = numberOfthumbNails;
+            int width = thumbNailHolder.Width;
+            int numPerLine = width / Movie.getNailWatchWidth();
+            Console.Out.WriteLine("W=" + width + " numPer = " + numPerLine);
+            int numLines = (int)Math.Ceiling(numNails / (double)numPerLine);
+            thumbNailHolder.Height = numLines * Movie.getNailWatchHeight();
+        }
+
+        private void btnNavRate_Click(object sender, EventArgs e)
+        {
+            ratingsDone = 0;
+            changetoRateMovieList();
+        }
+
+        public void changetoRateMovieList()
+        {
+            pnlContent.Controls.Clear();
+
+
+            DBConnect helper = new DBConnect();
+            Movie theMovie = helper.selectRandomMovies(1)[0];
+            currMovie = theMovie;
+            
+            //Panel pnlRate = new Panel();
+            //pnlRate.Controls.Add(theMovie.buildThumbnailPanel());
+           // pnlRate.Dock = DockStyle.Fill;
+
+            //Add left column contents
+            FlowLayoutPanel leftCol = new FlowLayoutPanel();
+            leftCol.Padding = new Padding(0);
+            leftCol.Dock = DockStyle.Fill;
+            leftCol.FlowDirection = FlowDirection.TopDown;
+
+
+            //Create area for ratings
+            FlowLayoutPanel ratings = new FlowLayoutPanel();
+            ratings.Margin = new Padding(22, 0, 0, 0);
+            //ratings.Height = 550;
+            //ratings.Width = 550;
+            ratings.FlowDirection = FlowDirection.LeftToRight;
+            ratings.Padding = new Padding(0);
+            ratings.BackColor = Color.SteelBlue;
+            PictureBox starOne = new PictureBox();
+            PictureBox starTwo = new PictureBox();
+            PictureBox starThree = new PictureBox();
+            PictureBox starFour = new PictureBox();
+            PictureBox starFive = new PictureBox();
+            starOne.Size = new Size(25, 26);
+            starTwo.Size = new Size(25, 26);
+            starThree.Size = new Size(25, 26);
+            starFour.Size = new Size(25, 26);
+            starFive.Size = new Size(25, 26);
+
+            starOne.Margin = new Padding(3);
+            starTwo.Margin = new Padding(3);
+            starThree.Margin = new Padding(3);
+            starFour.Margin = new Padding(3);
+            starFive.Margin = new Padding(3);
+
+            starOne.Padding = new Padding(0);
+            starTwo.Padding = new Padding(0);
+            starThree.Padding = new Padding(0);
+            starFour.Padding = new Padding(0);
+            starFive.Padding = new Padding(0);
+
+            starOne.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+            starTwo.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+            starThree.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+            starFour.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+            starFive.ImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Graphics/blankstar.png");
+
+            stars = new List<PictureBox>();
+            stars.Add(starOne);
+            stars.Add(starTwo);
+            stars.Add(starThree);
+            stars.Add(starFour);
+            stars.Add(starFive);
+
+
+            //Event listeners
+            ratings.MouseLeave += new EventHandler(ratings_MouseLeave);
+
+           starOne.MouseEnter += new EventHandler(oneStar_MouseEnter);
+           starTwo.MouseEnter += new EventHandler(twoStar_MouseEnter);
+           starThree.MouseEnter += new EventHandler(threeStar_MouseEnter);
+          starFour.MouseEnter += new EventHandler(fourStar_MouseEnter);
+          starFive.MouseEnter += new EventHandler(fiveStar_MouseEnter);
+
+          starOne.MouseClick += new MouseEventHandler(starOne_MouseClick);
+          starTwo.MouseClick += new MouseEventHandler(starTwo_MouseClick);
+          starThree.MouseClick += new MouseEventHandler(starThree_MouseClick);
+          starFour.MouseClick += new MouseEventHandler(starFour_MouseClick);
+          starFive.MouseClick += new MouseEventHandler(starFive_MouseClick);
+
+            Button btnSkip = new Button();
+            btnSkip.MouseClick += new MouseEventHandler(btnSkip_MouseClick);
+            btnSkip.Text = "Skip";
+            btnSkip.BackColor = Color.LightSkyBlue;
+            btnSkip.ForeColor = Color.White;
+            btnSkip.Width = 150;
+            btnSkip.FlatStyle = FlatStyle.Flat;
+
+            Label lblRatingsLeft = new Label();
+            lblRatingsLeft.ForeColor = Color.White;
+            lblRatingsLeft.Text = (5 - ratingsDone).ToString() + " ratings to go.";
+
+
+            //Add to panels
+            ratings.Controls.Add(starOne);
+            ratings.Controls.Add(starTwo);
+            ratings.Controls.Add(starThree);
+            ratings.Controls.Add(starFour);
+            ratings.Controls.Add(starFive);
+            ratings.Controls.Add(btnSkip);
+            
+
+
+            leftCol.Controls.Add(theMovie.buildThumbnailPanel()); //add thumbnails
+
+            leftCol.Controls.Add(ratings);
+
+            leftCol.Controls.Add(lblRatingsLeft);
+
+            pnlContent.Controls.Add(leftCol);
+            //pnlRate.Controls.Add(leftCol);
+
+
+        }
+
+        void starFive_MouseClick(object sender, MouseEventArgs e)
+        {
+            fiveStar_MouseClick(sender, e);
+            ratingsDone--;
+            changetoRateMovieList();
+        }
+
+        void starFour_MouseClick(object sender, MouseEventArgs e)
+        {
+            fourStar_MouseClick(sender, e);
+            ratingsDone--;
+            changetoRateMovieList();
+
+        }
+
+        void starThree_MouseClick(object sender, MouseEventArgs e)
+        {
+            threeStar_MouseClick(sender, e);
+            ratingsDone--;
+            changetoRateMovieList();
+        }
+
+        void starTwo_MouseClick(object sender, MouseEventArgs e)
+        {
+            twoStar_MouseClick(sender, e);
+            ratingsDone--;
+            changetoRateMovieList();
+        }
+
+        void starOne_MouseClick(object sender, MouseEventArgs e)
+        {
+            oneStar_MouseClick(sender, e);
+            ratingsDone--;
+            changetoRateMovieList();
+
+        }
+
+        void btnSkip_MouseClick(object sender, MouseEventArgs e)
+        {
+            changetoRateMovieList();
         }
 
     }

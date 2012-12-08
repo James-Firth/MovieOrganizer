@@ -126,6 +126,8 @@ namespace MovieOrganizer
             Button BTNWatchList = new Button();
             BTNWatchList.Dock = DockStyle.Bottom;
             BTNWatchList.AutoSize = true;
+            BTNWatchList.FlatStyle = FlatStyle.Flat;
+            BTNWatchList.BackColor = Color.LightSkyBlue;
             BTNWatchList.TextAlign = ContentAlignment.MiddleCenter;
             BTNWatchList.MouseClick += new MouseEventHandler(recItemAdd_MouseClick);
 
@@ -136,9 +138,8 @@ namespace MovieOrganizer
                 BTNWatchList.Text = removeFrom;
 
             output.Controls.Add(poster);
-            output.Controls.Add(BTNWatchList);
             output.Controls.Add(titleBox);
-
+            output.Controls.Add(BTNWatchList);
 
             poster.Click += new EventHandler(clickedThumbNail);
             output.Click += new EventHandler(clickedThumbNail);
@@ -194,7 +195,6 @@ namespace MovieOrganizer
             return Actors;
         }
 
-        //public Movie(int MID, String title, String length, String director, String year, List<Actor> Actors, List<Genre> Genres)
         public String getInfo()
         {
             String info = "Runtime: " + length + System.Environment.NewLine + System.Environment.NewLine + "Director: " + director + " " + System.Environment.NewLine + System.Environment.NewLine + "Year: " + year + System.Environment.NewLine + System.Environment.NewLine + "Genre: ";

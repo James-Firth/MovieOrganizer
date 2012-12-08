@@ -67,7 +67,7 @@ namespace MovieOrganizer
             if (userValid && passValid) //txtboxUserName.Text.Equals("username") && txtboxPassword.Text.Equals("Password");
             {
                 //MessageBox.Show("UID:" + temp[0][0]);
-                HomeForm main = new HomeForm(this, int.Parse(temp[0][0]));
+                HomeForm main = new HomeForm(this, int.Parse(temp[0][0]),txtboxUserName.Text);
                 main.Show();
                 this.Hide();
                 txtboxPassword.Text = "";

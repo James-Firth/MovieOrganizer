@@ -498,7 +498,7 @@ namespace MovieOrganizer
 
             string query = "SELECT avg(R.value) as avg,F.GID as GeID FROM `FitsIn` F,Ratings R WHERE R.UID =" + UID + " AND F.MID = R.MID GROUP BY F.GID";
 
-            SortedList genreScores = new SortedList();
+
             List<Movie> list = new List<Movie>();
             //Open connection
             if (this.OpenConnection() == true)
@@ -508,9 +508,28 @@ namespace MovieOrganizer
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 //Read the data and store them in the list
+
+                double value1 = -1;
+                int GID1 = -1;
+                double value2 = -1;
+                int GID2 = -1;
+
+
+
                 while (dataReader.Read())
                 {
-                    genreScores.Add(double.Parse(dataReader["avg"] + ""), int.Parse(dataReader["GeID"] + ""));
+                    if (double.Parse(dataReader["avg"] + "") > value1)
+                    {
+                        value1 = double.Parse(dataReader["avg"] + "");
+                        GID1 = int.Parse(dataReader["GeID"] + "");
+                    }
+                    else if (double.Parse(dataReader["avg"] + "") > value2)
+                    {
+                        value2 = double.Parse(dataReader["avg"] + "");
+                        GID2 = int.Parse(dataReader["GeID"] + "");
+                    }
+
+                    //genreScores.Add(double.Parse(dataReader["avg"] + ""), int.Parse(dataReader["GeID"] + ""));
                 }
 
 
@@ -519,16 +538,20 @@ namespace MovieOrganizer
 
                 //Pick top n Genre
                 const int n = 2;
-
+                int curGID;
                 for (int i = 0; i < n; i++)
                 {
-                    int curGID = -1;
-
-                    if (genreScores.Count > 0)
+                    curGID = -1;
+                    if (i == 0)
                     {
-                        curGID = (int)genreScores.GetByIndex(genreScores.Count - 1);
-                        genreScores.RemoveAt(genreScores.Count - 1);
+                        curGID =GID1;
                     }
+                    else if (i == 1)
+                    {
+                        curGID = GID2;
+                    }
+
+
 
 
                     if (curGID != -1)
