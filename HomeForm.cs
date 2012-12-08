@@ -93,6 +93,13 @@ namespace MovieOrganizer
                     changetoProfilePage();
                     lblLocation.Text = temp;
                 }
+                else if(temp.Contains("Recommendations"))
+                {
+                    DBConnect helper = new DBConnect();
+                    changeToRecPage(helper.selectRecomendations(UID));
+                    lblLocation.Text = temp;
+                    
+                }
                 else
                 {
                     //MessageBox.Show("MOVIE INFO LINK: " + loc + " + " + loc.Substring(0, 7));
@@ -591,7 +598,7 @@ namespace MovieOrganizer
                 pnlSearch.AutoScroll = true;
 
                 thumbNailHolder = new FlowLayoutPanel();
-                thumbNailHolder.BackColor = System.Drawing.Color.LightYellow;
+                thumbNailHolder.BackColor = Color.SteelBlue;
                 thumbNailHolder.Dock = DockStyle.Top;
                 thumbNailHolder.Height = 1000;
 
@@ -602,7 +609,7 @@ namespace MovieOrganizer
                 this.Resize += new EventHandler(searchSizeChange);
 
                 FlowLayoutPanel topAdvanceBar = new FlowLayoutPanel();
-                topAdvanceBar.BackColor = Color.Red;
+                topAdvanceBar.BackColor = Color.CornflowerBlue;
                 topAdvanceBar.Height = 40;
 
                 searchTitle = new TextBox();
@@ -884,10 +891,15 @@ namespace MovieOrganizer
         {
             if (found.Count > 0)
             {
+                removeBreadcrumbs(null, "");
+
                 pnlContent.Controls.Clear();
                 //Begin Building next panel
 
                 pnlRec = new Panel();
+                addBreadrumbs(pnlRec, "Recommendations");
+                lblLocation.Text = "Recommendations";
+
                 pnlRec.Dock = DockStyle.Fill;
                 pnlRec.AutoScroll = true;
 
@@ -1060,7 +1072,7 @@ namespace MovieOrganizer
 
         public void changetoRateMovieList()
         {
-            if (ratingsDone > 0)
+            if (ratingsDone > 0 || ratingsDone == -1)
             {
                 removeBreadcrumbs(null, "");
                 lblLocation.Text = "Rating Movies";
@@ -1169,12 +1181,52 @@ namespace MovieOrganizer
 
                 leftCol.Controls.Add(ratings);
 
-                leftCol.Controls.Add(lblRatingsLeft);
+                if(ratingsDone != -1)
+                    leftCol.Controls.Add(lblRatingsLeft);
 
                 pnlContent.Controls.Add(leftCol);
                 //pnlRate.Controls.Add(leftCol);
             }
+            else
+            {
+                pnlContent.Controls.Clear();
+                FlowLayoutPanel temp = new FlowLayoutPanel();
+                temp.FlowDirection = FlowDirection.TopDown;
+                temp.Height = 400;
+                temp.Width = 800;
+                Label error = new Label();
+                error.Height = 150;
+                error.Width = 800;
+                error.TextAlign = ContentAlignment.BottomCenter;
+                error.ForeColor = Color.White;
+                error.Text = "Ratings Complete! We can now give you recommendations, if you would like to continue rating movies, click the button below:";
+                lblLocation.Text = "Ratings Complete";
 
+                Button moreRatings = new Button();
+                moreRatings.Margin = new Padding(350, 20, 0, 0);
+                moreRatings.Text = "Continue Rating!";
+                moreRatings.AutoSize = true;
+                moreRatings.FlatStyle = FlatStyle.Flat;
+                moreRatings.ForeColor = Color.White;
+                moreRatings.BackColor = Color.LightSkyBlue;
+
+                moreRatings.MouseClick += new MouseEventHandler(moreRatings_MouseClick);
+
+
+
+                
+                
+                temp.Controls.Add(error);
+                temp.Controls.Add(moreRatings);
+                pnlContent.Controls.Add(temp);
+            }
+
+        }
+
+        void moreRatings_MouseClick(object sender, MouseEventArgs e)
+        {
+            ratingsDone = -1;
+            changetoRateMovieList();
         }
 
         void starFive_MouseClick(object sender, MouseEventArgs e)
