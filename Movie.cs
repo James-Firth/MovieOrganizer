@@ -66,13 +66,11 @@ namespace MovieOrganizer
 
             output.Size = new System.Drawing.Size(thumbNailWidth, thumbNailHeight);
 
-            output.BackColor = System.Drawing.Color.LimeGreen;
-
+            output.BackColor = System.Drawing.Color.AntiqueWhite;
             output.Margin = new Padding(thumbNailPadding);
 
 
             PictureBox poster = new PictureBox();
-            poster.BackColor = Color.AntiqueWhite;
             poster.Padding = new Padding(10);
             poster.Dock = DockStyle.Fill;
             poster.SizeMode = PictureBoxSizeMode.StretchImage;
